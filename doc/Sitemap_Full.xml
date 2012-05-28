@@ -1,0 +1,186 @@
+<mockup version="1.0" skin="sketch" measuredW="1688" measuredH="1354" mockupW="1597" mockupH="1274">
+  <controls>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::FieldSet" x="689" y="80" w="469" h="414" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <text>Main%20Page%2C%20that%20is%20%22Introduction%22</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::CoverFlow" x="815" y="219" w="241" h="102" measuredW="493" measuredH="198" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::MenuBar" x="713" y="147" w="430" h="29" measuredW="430" measuredH="29" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Introduction%2C%20Who%20we%20are%2C%20Workshops%2C%20Webshop%2C%20Contact</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::FieldSet" x="483" y="952" w="376" h="387" measuredW="200" measuredH="170" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20product%20group%20%28e.g.%20Cuddlies%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::FieldSet" x="1380" y="575" w="308" h="238" measuredW="200" measuredH="170" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Contact%20information</text>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::FieldSet" x="483" y="575" w="376" h="351" measuredW="200" measuredH="170" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Workshops</text>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::Paragraph" x="1395" y="598" w="278" h="200" measuredW="200" measuredH="80" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Primary%20Content*%0A*%20General%20contact%20information%20%28we%20would%20like%20that%20the%20workshop%20and%20webshop%20inquiries%20are%20done%20with%20the%20corresponding%20forms%29%0A*%20Names%0A*%20Street%20Addresses%0A*%20Email%20and%20other%20electronic%20addresses%0A%20%0A*Links%20to%20promote%20relating%20pages*%0A*%20Links%20to%20workshops%20%22see%20our%20workshops%22%0A*%20Links%20to%20webshop%20%22order%20our%20products%22%0A*%20Link%20to%20timetables</text>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::Arrow" x="1035" y="167" w="120" h="408" measuredW="150" measuredH="100" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <color>14706278</color>
+        <direction>top</direction>
+        <leftArrow>false</leftArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::FieldSet" x="1002" y="575" w="293" h="275" measuredW="200" measuredH="170" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Webshop</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::Paragraph" x="1017" y="596" w="263" h="202" measuredW="200" measuredH="80" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Primary%20content*%0A*%20Presenting%20the%20concept%20of%20the%20webshop%20%28this%20is%20quite%20different%20from%20usual%20webshops%29%0A*%20You%20can%20order%20items%0A*%20You%20can%20order%20products%20by%20mailorder%0A*%20The%20items%20are%20not%20%28necessarily%3F%3F%29%20the%20same%20as%20made%20in%20workshops%0A%20%0A*Terms%20and%20conditions*%0A*%20Full%20listing%20of%20terms%0A*%20%28this%20is%20relatively%20short%20compared%20to%20usual%20webshops%2C%20as%20we%20do%20not%20want%20to%20be%20lawyers%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::Paragraph" x="498" y="598" w="346" h="313" measuredW="200" measuredH="80" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Primary%20content*%0A*%20Presenting%20the%20workshops%20%22we%20arrange%20workshops%20for%20...%22%0A*%20How%20to%20participate%20in%20a%20workshop%0A*%20What%20do%20people%20do%20in%20a%20workshop%0A*%20Price%20policy%20of%20the%20workshops%20%28pricing%20per%20item%20made%29%0A%20%0A*Timetables*%0A*%20This%20is%20where%20the%20timetable%20information%20is%20foound%20on%20the%20site%0A%20%0A*Listing%20of%20example%20items*%0A*%20A%20few%20appealing%20images%2C%20so%20that%20people%20get%20more%20interested%0A*%20Category%3A%20Cuddlies%0A*%20Category%3A%20Hats%0A*%20etc...</text>
+      </controlProperties>
+    </control>
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::Paragraph" x="498" y="979" w="346" h="345" measuredW="200" measuredH="80" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Primary%20content*%0A*%20Meintioning%20of%20that%20this%20is%20a%20group%20of%20products%20which%20you%20make%20in%20workshops%0A*%20Description%20of%20the%20product%20group%20%22You%20can%20make%20cuddlies%20from%20patterns%20we%20offer....%22%0A*%20Example%20images%20of%20products%20in%20the%20group%20%28three%20images%29%0A%20%0A*Listing%20of%20the%20items%20in%20the%20group*%0AFor%20each%20item%3A%0A*%20Label%20for%20work%20phase%20%28knitwork%2C%20lining%2C%20etc.%29%0A*%20Time%20for%20work%20phase%0A*%20Fabric/wool%20for%20work%20phase%0A*%20Yarn%20for%20work%20phase%0A*%20%28do%20we%20need%20additional%20specific%20materials%3F%3F%3F%29%0A*%20Other%20materials%20for%20work%20phase%0A*%20Subtotal%20for%20work%20phase%20%28in%20euro%29%0A*%20The%20total%20price%20for%20the%20item%20%28in%20euro%29%0A%20%0A*Other*%0A*%20Notes%20on%20taxes%20%28VAT%20included%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::Label" x="906" y="245" w="-1" h="-1" measuredW="59" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Carousell</text>
+      </controlProperties>
+    </control>
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::Arrow" x="649" y="835" w="67" h="117" measuredW="150" measuredH="100" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>14706278</color>
+        <leftArrow>false</leftArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::Arrow" x="634" y="167" w="312" h="408" measuredW="150" measuredH="100" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>14706278</color>
+        <direction>bottom</direction>
+        <leftArrow>true</leftArrow>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="55" controlTypeID="com.balsamiq.mockups::FieldSet" x="913" y="957" w="293" h="247" measuredW="200" measuredH="170" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Workshop%20inquiry%20form</text>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::Paragraph" x="928" y="978" w="272" h="217" measuredW="200" measuredH="80" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Primary%20content*%0A*%20A%20separate%20page%20for%20making%20the%20inquiry%2C%20so%20that%20people%20can%20focus%20on%20this%20task%20%28usability%20point%20of%20view%29%0A*%20Who/how%20to%20contact%20for%20the%20workshop%0A%20%0A*A%20form*%0A*%20Name%0A*%20Telephone%2C%20e-mail%2C%20street%20address%2C%20etc.%0A*%20Time%20and%20place%20to%20participate%0A%20%0A*There%20is%20a%20confirmation%20when%20the%20form%20is%20submitted*</text>
+      </controlProperties>
+    </control>
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::Arrow" x="1101" y="167" w="459" h="408" measuredW="150" measuredH="100" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <color>14706278</color>
+        <direction>top</direction>
+        <leftArrow>false</leftArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::Arrow" x="732" y="654" w="248" h="297" measuredW="150" measuredH="100" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>14706278</color>
+        <leftArrow>false</leftArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::CallOut" x="704" y="118" w="-1" h="-1" measuredW="37" measuredH="40" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <text>1</text>
+      </controlProperties>
+    </control>
+    <control controlID="61" controlTypeID="com.balsamiq.mockups::CallOut" x="913" y="266" w="-1" h="-1" measuredW="39" measuredH="37" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>2</text>
+      </controlProperties>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::CallOut" x="826" y="1308" w="-1" h="-1" measuredW="39" measuredH="39" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <text>2</text>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::Label" x="865" y="1300" w="110" h="54" measuredW="249" measuredH="21" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>The%20caruosell%20links%20to%20a%20product%20group%20page</text>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::CallOut" x="135" y="119" w="-1" h="-1" measuredW="37" measuredH="39" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <text>1</text>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::Paragraph" x="713" y="343" w="403" h="151" measuredW="200" measuredH="80" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Primary%20content*%0A*%20Introduction%20on%20what%20textile%20is%0A*%20%22How%20does%20it%20work%22%20%28description%20of%20the%20workshops%29%0A*%20The%20above%20serves%20as%20a%20brief%20%28sort%20of%20partial%29%20introduction%2C%20which%20makes%20people%20more%20interested%20in%20browsing%20the%20site%0A*%20The%20top%20level%20links%20must%20be%20extremely%20clear%20%28in%20both%20layout%20and%20concepts%29%2C%20so%20that%20people%20know%20which%20way%20to%20go%20once%20they%20have%20become%20interested</text>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::FieldSet" x="1295" y="957" w="301" h="247" measuredW="200" measuredH="170" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Webshop%20inquiry%20form</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::FieldSet" x="91" y="575" w="293" h="247" measuredW="200" measuredH="170" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Who%20we%20are</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::Paragraph" x="106" y="596" w="272" h="217" measuredW="200" measuredH="80" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Primary%20content*%0A*%20Who%20are%20the%20persons%20behind%20this%20concept%0A*%20Personal%20description%20and%20background%0A*%20This%20is%20a%20ship%20that%20sails%20around%20Europe%0A*%20The%20workshops%20are%20held%20on%20the%20ship%0A%20%0AThere%20will%20be%20duplicate%20content%20on%20the%20%22Contact%20information%22%2C%20%22Workshops%22%20and%20%22Webshop%22%20pages.%20This%20is%20still%20intentional.%20The%20site%20visitors%20are%20new%20to%20the%20concept%20and%20it%20is%20good%20that%20things%20are%20clarified%20on%20each%20page%20relating%20to%20particular%20services%20you%20offer.</text>
+      </controlProperties>
+    </control>
+    <control controlID="69" controlTypeID="com.balsamiq.mockups::Paragraph" x="1309" y="980" w="272" h="217" measuredW="200" measuredH="80" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Primary%20content*%0A*%20A%20separate%20page%20for%20making%20the%20inquiry%2C%20so%20that%20people%20can%20focus%20on%20this%20task%20%28usability%20point%20of%20view%29%0A*%20How%20to%20order%20some%20item%0A%20%0A*A%20form*%0A*%20Name%0A*%20Telephone%2C%20e-mail%2C%20street%20address%2C%20etc.%0A*%20What%20to%20order%0A%20%0A*There%20is%20a%20confirmation%20when%20the%20form%20is%20submitted*</text>
+      </controlProperties>
+    </control>
+    <control controlID="70" controlTypeID="com.balsamiq.mockups::Arrow" x="1174" y="668" w="213" h="289" measuredW="150" measuredH="100" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>14706278</color>
+        <leftArrow>false</leftArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="71" controlTypeID="com.balsamiq.mockups::Arrow" x="259" y="167" w="591" h="408" measuredW="150" measuredH="100" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>14706278</color>
+        <direction>bottom</direction>
+        <leftArrow>true</leftArrow>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="72" controlTypeID="com.balsamiq.mockups::Label" x="179" y="119" w="149" h="85" measuredW="484" measuredH="21" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Introduction%20is%20the%20%22main%20page%22%2C%20which%20visitors%20woud%20presumably%20see%20as%20the%20first%20page</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
