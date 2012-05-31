@@ -1,0 +1,12 @@
+[
+	{"pk": 1, "model": "auth.user", "fields": {
+		"username": "admin",
+		"first_name": "",
+		"last_name": "",
+		"is_active": true,
+		"is_superuser": true,
+		"is_staff": true,
+		"password": "pbkdf2_sha256$10000$sEQZGxeHL9eh$/o4br6BXWvsiqP+SS4mNHGytRryLEWKl2hcMn1uqWJA=",
+		"email": "admin@salina.nl"
+	}}
+]

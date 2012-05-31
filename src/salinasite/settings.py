@@ -42,7 +42,7 @@ USE_TZ = False
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -116,6 +116,20 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    # Defaults (Django 1.4)
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    
+    # Added
+    'django.core.context_processors.request',
+)
+
 ROOT_URLCONF = 'salinasite.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -133,7 +147,7 @@ INSTALLED_APPS = (
     'salina',
     
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -166,7 +180,12 @@ LOGGING = {
         },
     },
     
-#    'loggers': {},
+    'loggers': {
+        'django.db.backends' : {
+            'handlers':['null'],
+            'propagate': False,
+        }
+    },
     
     'root' : {
         'handlers': ['file'],

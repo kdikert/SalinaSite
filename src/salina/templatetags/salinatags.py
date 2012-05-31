@@ -1,32 +1,52 @@
 
+import logging
+import markdown
+
 from django import template
 from django.template import Node
 from django.template.defaulttags import url
 from django.template.base import TemplateSyntaxError
+from django.utils import translation
 from django.utils.encoding import force_unicode
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 
-from salina.models import CMSText
+from salina.models import CMSEntry, CMSTranslation
 
 register = template.Library()
 
 
 class CMSTextNode(Node):
     
+    ALERT_BOX = '<div style="color: red; font-weight: bold;">&lt;%s&gt;</div>'
+    
     def __init__(self, text_id):
         super(CMSTextNode, self).__init__()
+        
         self.text_id = text_id
+        self.entry = None
+        self.translation = None
+        self.text = None
+        
+        self.escape_output = False
+        
         try:
-            self.text_object = CMSText.objects.get(text_id=self.text_id)
-        except CMSText.DoesNotExist:
-            raise TemplateSyntaxError('Text with ID "%s" does not exist' % text_id)
-            pass
+            current_language = translation.get_language()
+            logging.debug("LANG: %s", current_language)
+            self.entry = CMSEntry.objects.get(entry_id=self.text_id)
+            self.translation = self.entry.translations.get(locale=current_language)
+            self.text = self.translation.text
+        except CMSEntry.DoesNotExist:
+            self.text = CMSTextNode.ALERT_BOX % ('invalid text "%s"' % self.text_id)
+        except CMSTranslation.DoesNotExist:
+            self.text = CMSTextNode.ALERT_BOX % ('missing translation "%s" (%s)' % (self.text_id, current_language))
     
     def render(self, context):
-        value = self.text_object.text
-        value = force_unicode(value)
-        value = escape(value)
+        value = force_unicode(self.text)
+        
+        if self.escape_output:
+            value = escape(value)
+        value = markdown.markdown(value)
         return mark_safe(value)
 
 

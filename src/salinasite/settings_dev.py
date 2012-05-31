@@ -23,6 +23,10 @@ LOGGING = {
     },
     
     'handlers': {
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
+        },
         'file': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
@@ -40,7 +44,12 @@ LOGGING = {
         },
     },
     
-#    'loggers': {},
+    'loggers': {
+        'django.db.backends' : {
+            'handlers':['null'],
+            'propagate': False,
+        }
+    },
     
     'root' : {
         'handlers': ['debug'],

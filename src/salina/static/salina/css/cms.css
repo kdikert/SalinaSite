@@ -1,0 +1,17 @@
+@CHARSET "utf-8";
+
+.cmscontainer {
+	margin: 2em 0em 0em;
+	padding: 1em 20px;
+	clear: both;
+	background-color: #684707;
+	color: #FFF;
+}
+
+.cmscontainer h1 {
+	margin-bottom: .5em;
+}
+
+.cmscontainer p {
+	margin-top: 1em;
+}
