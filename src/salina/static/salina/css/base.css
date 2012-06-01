@@ -58,7 +58,7 @@ p {
 #topwrap {
     padding: 0em 3em;
     background-color: #faa501;
-    background-image: url("/static/salina/img/bg_gradient.png");
+    background-image: url("/static/salina/img/bg_gradient50.png");
     background-repeat: repeat-x;
     background-position: 0% 0%;
 }
@@ -68,7 +68,7 @@ p {
 }
 
 #header h1 {
-	padding: 32px 20px 24px;
+	padding: 32px 32px 24px;
 	font-family: arial;
 	font-size: 32pt;
 	background-color: #684707;
