@@ -27,11 +27,11 @@ h1 {
 }
 
 h2 {
-	font-size: 16pt;
+	font-size: 14pt;
 }
 
 h3 {
-	font-size: 14pt;
+	font-size: 12pt;
 }
 
 p {
@@ -45,8 +45,8 @@ p {
 
 .centering {
 	width: 900px;
-    margin: 0px auto;
-    border: 0px none;
+    margin: 0em auto;
+    border: 0em none;
 }
 
 #rootwrap {
@@ -56,7 +56,7 @@ p {
 }
 
 #topwrap {
-    padding: 0em 3em;
+    padding: 0em 60px;
     background-color: #faa501;
     background-image: url("../img/bg_gradient50.png");
     background-repeat: repeat-x;
@@ -64,7 +64,7 @@ p {
 }
 
 #header {
-	padding: 1em 0em 0em;
+	padding: 20px 0em 0em;
 }
 
 #header h1 {
@@ -98,7 +98,7 @@ p {
 	float: left;
 	position: relative;
 	right: 50%;
-	margin: 0px 5px 0px;
+	margin: 0em 2px 0em;
 }
 
 #topmenu a, #topmenu a:HOVER, #topmenu a:ACTIVE, #topmenu a:VISITED {
@@ -126,7 +126,7 @@ p {
 }
 
 #footer {
-    padding: 1em 3em;
+    padding: 1em 60px;
 	height: 5em;
 	background-color: #9d223c;
 	background-image: url("../img/footer_gradient.png");
