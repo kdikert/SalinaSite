@@ -21,3 +21,4 @@ if os.path.exists(dbfile):
 execute_from_command_line([__file__, 'syncdb', '--noinput'])
 
 execute_from_command_line([__file__, 'loaddata', 'salina/user.json'])
+execute_from_command_line([__file__, 'loaddata', 'salina/cms.json'])
