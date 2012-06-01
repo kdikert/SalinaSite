@@ -58,7 +58,7 @@ p {
 #topwrap {
     padding: 0em 3em;
     background-color: #faa501;
-    background-image: url("/static/salina/img/bg_gradient50.png");
+    background-image: url("../img/bg_gradient50.png");
     background-repeat: repeat-x;
     background-position: 0% 0%;
 }
@@ -129,7 +129,7 @@ p {
     padding: 1em 3em;
 	height: 5em;
 	background-color: #9d223c;
-	background-image: url("/static/salina/img/footer_gradient.png");
+	background-image: url("../img/footer_gradient.png");
     background-repeat: repeat-x;
     background-position: 0% 0%;
 }
