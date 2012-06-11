@@ -7,6 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
      url(r'^', include('salina.urls')),
+     url(r'^admin/', include('salinaadmin.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     #url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

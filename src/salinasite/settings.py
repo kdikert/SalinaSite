@@ -130,7 +130,17 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
 )
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
 ROOT_URLCONF = 'salinasite.urls'
+
+LOGIN_URL = '/admin/login'
+
+LOGIN_REDIRECT_URL = '/admin'
+
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'salinasite.wsgi.application'
@@ -145,6 +155,7 @@ INSTALLED_APPS = (
     
 #    'south',
     'salina',
+    'salinaadmin',
     
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',

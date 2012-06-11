@@ -1,0 +1,27 @@
+{% extends "salina/base.html" %}
+{% load i18n %}
+{% load salinatags %}
+
+{% block content %}
+
+
+<div class="cmscontainer">
+    <h1>
+    {% trans "Password protected section" %}
+    </h1>
+    
+    {% if form.errors %}
+        <p class="error">{% trans "Invalid password" %}</p>
+    {% endif %}
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <div>{% trans "Username" %}</div>
+        <input name="username" type="text"/>
+        <div>{% trans "Password" %}</div>
+        <input name="password" type="password"/>
+        <input type="submit" value="{% trans 'Login' %}"/>
+    </form>
+</div>
+
+{% endblock %}
