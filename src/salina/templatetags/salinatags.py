@@ -1,5 +1,4 @@
 
-import logging
 import markdown
 
 from django import template
@@ -32,7 +31,6 @@ class CMSTextNode(Node):
         
         try:
             current_language = translation.get_language()
-            logging.debug("LANG: %s", current_language)
             self.entry = CMSEntry.objects.get(entry_id=self.text_id)
             self.translation = self.entry.translations.get(locale=current_language)
             self.text = self.translation.text
