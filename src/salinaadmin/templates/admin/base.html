@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+{% load i18n %}
+{% load salinatags %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% trans "Atelier Salina" %} - {% trans "Administration" %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/css/admin.css" />
+
+    <script type="text/javascript" src="{{ STATIC_URL }}salina/js/jquery-1.7.2.min.js"></script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+<div id="rootwrap">
+    <div id="header">
+        <h1>{% trans "Administration section" %}</h1>
+    
+        <div id="topmenu">
+            <ul>
+                <li><a class="{% url_equals index %}" href="{% url index %}">{% trans "Texts" %}</a></li>
+                <li><a class="{% url_equals about %}" href="{% url about %}">{% trans "Atelier products" %}</a></li>
+                <li><a href="{% url index %}">{% trans "Back to site" %}</a></li>
+                <li><a href="{% url admin_logout %}">{% trans "Logout" %}</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="content">
+    {% block content %}{% endblock %}
+    </div>
+    
+</div>
+
+</body>
+</html>

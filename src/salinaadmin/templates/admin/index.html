@@ -1,14 +1,20 @@
-{% extends "salina/base.html" %}
+{% extends "admin/base.html" %}
 {% load i18n %}
 {% load salinatags %}
 
 {% block content %}
 
 
-<div class="cmscontainer">
+<div class="section">
     <h1>
-    {% trans "Admin section" %}
+    {% trans "Administration tasks" %}
     </h1>
+    
+    <ul>
+    <li>{% trans "Manage texts" %}</li>
+    <li>{% trans "Manage atelier products" %}</li>
+    </ul>
+    
 </div>
 
 {% endblock %}
