@@ -13,7 +13,7 @@ body {
 	border: 0em;
 	height: 100%;
 	font-family: sans-serif;
-	background-color: #f2efe0;
+	background-color: #fadb9e;
 }
 
 h1, h2, h3 {
@@ -36,7 +36,7 @@ h3 {
 
 p {
 	font-family: arial;
-	text-align: justify;
+	text-align: left;
 	font-size: 12pt;
 	margin: 0em;
 }
@@ -44,24 +44,27 @@ p {
 /* *************************************************************** */
 
 #rootwrap {
-	width: 900px;
-    margin: 0em auto;
-    border: 0em none;
-    
-	min-height: 100%;
-	background-color: #fadb9e;
+    margin: 0em;
 }
 
 #header {
-	padding: 1em 0em 0em;
+	padding: 0em;
 }
 
 #header h1 {
 	padding: 32px 40px 18px;
 	font-family: arial;
 	font-size: 26pt;
+	
 	background-color: #9d223c;
 	color: #EEE;
+	
+}
+
+#header h1 a, #header h1 a:HOVER, #header h1 a:ACTIVE, #header h1 a:VISITED  {
+	color: #EEE;
+	font-style: normal;
+	text-decoration: none;
 }
 
 #topmenu, #topmenu ul, #topmenu li {
@@ -73,12 +76,18 @@ p {
 
 #topmenu {
 	float: left;
-	margin-top: 1em;
-	padding: .5em 0em .5em 40px;
-	background-color: #9d223c;
+	margin: 0em;
+	width: 100%;
+	padding: .7em 0em .8em;
+	/*background-color: #9d223c;*/
+
+	background-image: url("../img/gradient1.png");
+    background-repeat: repeat-x;
+    background-position: 0% 0%;
 }
 
 #topmenu ul {
+	padding-left: 40px;
 }
 
 #topmenu li {
@@ -89,7 +98,7 @@ p {
 #topmenu a, #topmenu a:HOVER, #topmenu a:ACTIVE, #topmenu a:VISITED {
 	display: block;
 	
-	color: #EEE;
+	color: #000;
 	
 	/* font-size: 11pt; */
 	font-style: normal;
@@ -97,13 +106,16 @@ p {
 	text-decoration: underline;
 }
 
+#topmenu a:HOVER {
+	color: #00F;
+}
+
 #topmenu a.selectedLink {
-	color: #AAA;
-	font-style: italic;
+	font-style: italic !important;
 }
 
 #content {
 	clear: both;
-	padding: 2em 1em 1em;
+	padding: 2em 4em 1em;
 }
 
