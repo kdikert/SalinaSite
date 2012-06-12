@@ -78,13 +78,13 @@ class UrlMatchTextNode(Node):
             if len(path) > 1 and path.endswith("/"):
                 path = path[:-1]
             if len(url_result) > 1 and url_result.endswith("/"):
-                url_result = path[:-1]
+                url_result = url_result[:-1]
             
             if self.full_match:
-                if url_result == request.path:
+                if path == url_result:
                     return self.text
             else:
-                if request.path.startswith(url_result):
+                if path.startswith(url_result):
                     return self.text
         
         return ''
