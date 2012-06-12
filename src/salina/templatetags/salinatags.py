@@ -10,7 +10,7 @@ from django.utils.encoding import force_unicode
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 
-from salina.models import CMSEntry, CMSTranslation
+from salina.models import CMSEntry
 
 register = template.Library()
 
@@ -24,7 +24,6 @@ class CMSTextNode(Node):
         
         self.text_id = text_id
         self.entry = None
-        self.translation = None
         self.text = None
         
         self.escape_output = False
@@ -32,12 +31,15 @@ class CMSTextNode(Node):
         try:
             current_language = translation.get_language()
             self.entry = CMSEntry.objects.get(entry_id=self.text_id)
-            self.translation = self.entry.translations.get(locale=current_language)
-            self.text = self.translation.text
+            
+            transl = self.entry.get_translation_entry(current_language)
+            if transl:
+                self.text = transl.text
+            else:
+                self.text = CMSTextNode.ALERT_BOX % ('missing translation "%s" (%s)' % (self.text_id, current_language))
+            
         except CMSEntry.DoesNotExist:
             self.text = CMSTextNode.ALERT_BOX % ('invalid text "%s"' % self.text_id)
-        except CMSTranslation.DoesNotExist:
-            self.text = CMSTextNode.ALERT_BOX % ('missing translation "%s" (%s)' % (self.text_id, current_language))
     
     def render(self, context):
         value = force_unicode(self.text)

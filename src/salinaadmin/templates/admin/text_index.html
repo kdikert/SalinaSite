@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+{% load salinatags %}
+
+{% block content %}
+
+
+<h1>
+{% trans "Manage site texts" %}
+</h1>
+
+<div class="section">
+    <table>
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        {% for locale_code, locale_name in locales %}
+        <th>{{locale_name}}</th>
+        {% endfor %}
+    </tr>
+    {% for text in texts %}
+    <tr>
+        <td>{{text.entry_id}}</td>
+        <td>{{text.description}}</td>
+        {% for locale_code, transl in text.get_translation_entries_per_locale %}
+        <td>
+            {% if transl %}
+            {% trans "Updated" %} {{transl.timestamp|date:"DATE_FORMAT"}}
+            {% else %}
+            <span class="error">{% trans "Unavailable" %}</span>
+            {% endif %}
+            (<a href="{% url admin_text_edit text.entry_id locale_code %}">{% trans "Edit" %}</a>)
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </table>
+    
+</div>
+
+{% endblock %}
