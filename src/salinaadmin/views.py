@@ -14,6 +14,9 @@ def index(request):
 
 
 def login(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse(index))
+    
     if request.GET.get(auth.REDIRECT_FIELD_NAME) == reverse(logout):
         return HttpResponseRedirect(reverse(login))
     
