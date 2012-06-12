@@ -8,11 +8,6 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
 
-@login_required
-def index(request):
-    return render_to_response("admin/index.html", context_instance=RequestContext(request))
-
-
 def login(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse(index))
@@ -27,3 +22,17 @@ def login(request):
 def logout(request):
     return django.contrib.auth.views.logout(request, template_name='admin/logout.html')
 
+
+@login_required
+def index(request):
+    return render_to_response("admin/index.html", context_instance=RequestContext(request))
+
+
+@login_required
+def texts(request):
+    return render_to_response("admin/texts.html", context_instance=RequestContext(request))
+
+
+@login_required
+def products(request):
+    return render_to_response("admin/products.html", context_instance=RequestContext(request))
