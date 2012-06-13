@@ -8,7 +8,7 @@ from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 
-from salina.models import CMSEntry
+from salina.models import CMSEntry, CMSPage
 
 
 def login(request):
@@ -33,10 +33,14 @@ def index(request):
 
 @login_required
 def text_index(request):
+    pages = CMSPage.objects.all_pages()
+    unassigned_texts = list(CMSEntry.objects.unassigned())
     locales = settings.LANGUAGES
-    texts = list(CMSEntry.objects.all())
+    
     return render_to_response("salinaadmin/text_index.html",
-                              {'texts': texts, 'locales': locales},
+                              {'pages': pages,
+                               'unassigned_texts': unassigned_texts,
+                               'locales': locales},
                               context_instance=RequestContext(request))
 
 

@@ -142,8 +142,14 @@ p, div.section {
 	color: red;
 }
 
-.text_id {
-	font-size: small;
-	vertical-align: middle;	
+tr.text_group td {
+	font-size: smaller;
+	padding-top: 1em;
 }
 
+.submit_button {
+}
+
+.cancel_button {
+	padding-left: 1em;
+}
