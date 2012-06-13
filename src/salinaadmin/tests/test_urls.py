@@ -13,7 +13,7 @@ class TestLogin(TestCase):
         response = self.client.get(reverse(views.login))
         
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'admin/login.html')
+        self.assertTemplateUsed(response, 'salinaadmin/login.html')
     
     def test_successful_log_in_redirects_to_admin_page(self):
         User.objects.create_superuser("tester", "test@test.com", "p4ss")

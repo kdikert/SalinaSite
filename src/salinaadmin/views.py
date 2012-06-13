@@ -18,24 +18,24 @@ def login(request):
     if request.GET.get(auth.REDIRECT_FIELD_NAME) == reverse(logout):
         return HttpResponseRedirect(reverse(login))
     
-    return django.contrib.auth.views.login(request, template_name='admin/login.html')
+    return django.contrib.auth.views.login(request, template_name='salinaadmin/login.html')
 
 
 @login_required
 def logout(request):
-    return django.contrib.auth.views.logout(request, template_name='admin/logout.html')
+    return django.contrib.auth.views.logout(request, template_name='salinaadmin/logout.html')
 
 
 @login_required
 def index(request):
-    return render_to_response("admin/index.html", context_instance=RequestContext(request))
+    return render_to_response("salinaadmin/index.html", context_instance=RequestContext(request))
 
 
 @login_required
 def text_index(request):
     locales = settings.LANGUAGES
     texts = list(CMSEntry.objects.all())
-    return render_to_response("admin/text_index.html",
+    return render_to_response("salinaadmin/text_index.html",
                               {'texts': texts, 'locales': locales},
                               context_instance=RequestContext(request))
 
@@ -63,7 +63,7 @@ def text_edit(request, text_id, locale):
             if locale_code == locale:
                 break
         
-        return render_to_response("admin/text_edit.html",
+        return render_to_response("salinaadmin/text_edit.html",
                                   {'text': text_entry, 'old_text': old_text,
                                    'locale_name': locale_name},
                                   context_instance=RequestContext(request))
@@ -71,4 +71,4 @@ def text_edit(request, text_id, locale):
 
 @login_required
 def products(request):
-    return render_to_response("admin/products.html", context_instance=RequestContext(request))
+    return render_to_response("salinaadmin/products.html", context_instance=RequestContext(request))
