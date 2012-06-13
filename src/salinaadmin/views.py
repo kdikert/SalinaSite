@@ -9,7 +9,6 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 
 from salina.models import CMSEntry
-from salina.models import CMSTranslation
 
 
 def login(request):
