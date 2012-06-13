@@ -20,8 +20,8 @@
     </tr>
     {% for text in texts %}
     <tr>
-        <td>{{text.entry_id}}</td>
-        <td>{{text.description}}</td>
+        <td class="text_id">{{text.entry_id}}</td>
+        <td class="text_desc">{{text.description}}</td>
         {% for locale_code, transl in text.get_translation_entries_per_locale %}
         <td>
             {% if transl %}

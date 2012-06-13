@@ -142,3 +142,8 @@ p, div.section {
 	color: red;
 }
 
+.text_id {
+	font-size: small;
+	vertical-align: middle;	
+}
+
