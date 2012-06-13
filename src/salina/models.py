@@ -1,8 +1,9 @@
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.conf import settings
 from django.db import models
+import logging
 
 
 class CMSEntry(models.Model):
@@ -42,6 +43,26 @@ class CMSEntry(models.Model):
         
         return result
     
+    def update_translation(self, locale, new_text):
+        try:
+            transl = self.translations.filter(locale=locale).latest('timestamp')
+            
+            treshold = timedelta(seconds=settings.SALINA_CMS_TEXT_AMEND_TRESHOLD_SECONDS)
+            if datetime.now() - transl.timestamp < treshold:
+                logging.debug("Amending to previous entry (%s)", transl)
+                transl.text = new_text
+                transl.timestamp = datetime.now()
+            else:
+                logging.debug("Previous entry too old (%s)", transl)
+                transl = None
+        except CMSTranslation.DoesNotExist:
+            transl = None
+            
+        if not transl:
+            transl = CMSTranslation(entry=self, locale=locale, text=new_text)
+        
+        transl.save()
+    
     def __unicode__(self):
         return self.entry_id
 
@@ -61,4 +82,5 @@ class CMSTranslation(models.Model):
         ordering = ['entry__entry_id', 'locale', '-timestamp']
     
     def __unicode__(self):
-        return "%s (%s)" % (self.entry.entry_id, self.locale)
+        return "%s (%s %s)" % (self.entry.entry_id, self.locale,
+                               self.timestamp.strftime('%Y-%m-%d %H:%M'))

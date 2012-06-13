@@ -208,3 +208,5 @@ LOGGING = {
 
 TEMP_DIR = '/home/salina/tmp'
 
+SALINA_CMS_TEXT_AMEND_TRESHOLD_SECONDS = 60 * 10
+
