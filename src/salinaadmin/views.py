@@ -6,7 +6,7 @@ import django.contrib.auth.views
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 
 from salina.models import CMSEntry
 from salina.models import CMSTranslation
@@ -43,23 +43,31 @@ def text_index(request):
 
 @login_required
 def text_edit(request, text_id, locale):
-    text = get_object_or_404(CMSEntry, entry_id=text_id)
+    text_entry = get_object_or_404(CMSEntry, entry_id=text_id)
     
-    transl = text.get_translation_entry(locale)
-    if transl:
-        old_text = transl.text
+    if not locale in map(lambda(locale): locale[0], settings.LANGUAGES):
+        raise Http404()
+    
+    if request.method == 'POST':
+        new_text = request.POST.get('text', '')
+        text_entry.update_translation(locale, new_text)
+        return HttpResponseRedirect(reverse(text_index))
     else:
-        old_text = ""
-    
-    locale_name = ""
-    for locale_code, locale_name in settings.LANGUAGES:
-        if locale_code == locale:
-            break
-    
-    return render_to_response("admin/text_edit.html",
-                              {'text': text, 'old_text': old_text,
-                               'locale_name': locale_name},
-                              context_instance=RequestContext(request))
+        transl = text_entry.get_translation_entry(locale)
+        if transl:
+            old_text = transl.text
+        else:
+            old_text = ""
+        
+        locale_name = ""
+        for locale_code, locale_name in settings.LANGUAGES:
+            if locale_code == locale:
+                break
+        
+        return render_to_response("admin/text_edit.html",
+                                  {'text': text_entry, 'old_text': old_text,
+                                   'locale_name': locale_name},
+                                  context_instance=RequestContext(request))
 
 
 @login_required

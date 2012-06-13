@@ -20,7 +20,7 @@
 <form action="" method="post">
     {% csrf_token %}
     <div class="section">
-        <textarea rows="20" cols="80">{{old_text}}</textarea>
+        <textarea name="text" rows="20" cols="80">{{old_text}}</textarea>
     </div>
     <div class="section">
         <input type="submit" value="{% trans 'Save' %}"/>
