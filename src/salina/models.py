@@ -1,23 +1,116 @@
 
 from datetime import datetime, timedelta
+import logging
 
 from django.conf import settings
 from django.db import models
-import logging
 from django.db.utils import IntegrityError
+from django.utils import translation
+from django.db.models.signals import pre_delete
+
+
+class ProductGroupManager(models.Manager):
+    
+    def create(self, group_id):
+        cms_text_id = "product_group_%s" % group_id
+        cms_text_description = "Name of product group %s" % group_id
+        name_text = CMSEntry.objects.create(entry_id=cms_text_id,
+                                            description=cms_text_description)
+        try:
+            product_group = super(ProductGroupManager, self).create(group_id=group_id,
+                                                                    name_entry=name_text)
+        except:
+            name_text.delete()
+            raise
+        
+        return product_group
 
 
 class ProductGroup(models.Model):
     
-    name = models.CharField(max_length=40)
-    slug = models.CharField(max_length=40)
+    group_id = models.CharField(max_length=64, db_index=True, unique=True)
+    
+    name_entry = models.ForeignKey('CMSEntry', related_name='product_group_names')
+    
+    objects = ProductGroupManager()
+    
+    class Meta:
+        ordering = ['group_id']
+    
+    def __unicode__(self):
+        return "%s" % (self.group_id)
 
 
+def product_group_pre_delete_handler(sender, instance, **kwargs):
+    try:
+        instance.name_entry.delete()
+    except:
+        pass
+
+pre_delete.connect(product_group_pre_delete_handler, sender=ProductGroup)
+
+
+class Material(models.Model):
+    
+    name_entry = models.ForeignKey('CMSEntry', related_name='material_names')
+    
+    class Meta:
+        ordering = ['name_entry__entry_id']
+
+
+class ProductManager(models.Manager):
+    
+    def create(self, product_id, product_group):
+        pass
+
+    
 class Product(models.Model):
     
-    name = models.CharField(max_length=40)
-    slug = models.CharField(max_length=40)
+    product_id = models.CharField(max_length=64, db_index=True, unique=True)
     product_group = models.ForeignKey(ProductGroup, related_name='products')
+    
+    name_entry = models.ForeignKey('CMSEntry', related_name='product_names')
+
+    materials = models.ManyToManyField(Material, through='ProductMaterial')
+    
+    objects = ProductManager()
+    
+    class Meta:
+        ordering = ['product_id']
+
+
+class ProductMaterial(models.Model):
+    
+    material = models.ForeignKey(Material)
+    product = models.ForeignKey(Product)
+    ordering = models.PositiveIntegerField()
+    
+    class Meta:
+        unique_together = [('product', 'ordering')]
+        ordering = ['ordering']
+
+
+class ProductPart(models.Model):
+    
+    name_entry = models.ForeignKey('CMSEntry')
+    product = models.ForeignKey(Product, related_name='parts')
+    
+    time_min = models.PositiveIntegerField()
+    price = models.PositiveIntegerField()
+    
+    class Meta:
+        order_with_respect_to = 'product'
+
+
+class ProductPartMaterial(models.Model):
+    
+    product_material = models.ForeignKey(Material)
+    product_part = models.ForeignKey(ProductPart, related_name='materials')
+    
+    amount = models.CharField(max_length=64)
+    
+    class Meta:
+        ordering = ['product_material__ordering']
 
 
 KNOWN_PAGES = (
@@ -67,20 +160,16 @@ class CMSPage(object):
 class CMSEntryManager(models.Manager):
     
     def unassigned(self):
-        return self.filter(page=None, product_group=None, product=None)
+        return self.filter(page=None)
 
 
 class CMSEntry(models.Model):
     
-    entry_id = models.CharField(max_length=128, db_index=True)
+    entry_id = models.CharField(max_length=128, db_index=True, unique=True)
     
     description = models.TextField()
     
     page = models.CharField(max_length=40, null=True, blank=True)
-    
-    product_group = models.ForeignKey(ProductGroup, related_name='texts', null=True, blank=True)
-    
-    product = models.ForeignKey(Product, related_name='texts', null=True, blank=True)
     
     objects = CMSEntryManager()
     
@@ -90,16 +179,6 @@ class CMSEntry(models.Model):
     
     def has_translation(self, locale):
         return self.translations.filter(locale=locale).count() > 0
-    
-    def get_translation_entry(self, locale):
-        """Gets the appropriate CMSTranslation for the given locale. If there
-        is no translation available for the given locale None is returned.
-        @return: a CMSTranslation or None
-        """
-        try:
-            return self.translations.filter(locale=locale).latest('timestamp')
-        except CMSTranslation.DoesNotExist:
-            return None
     
     def get_translation_entries_per_locale(self):
         """Lists all available locales and the corresponding CMSTranslations.
@@ -114,6 +193,24 @@ class CMSEntry(models.Model):
             result.append((locale_code, transl))
         
         return result
+    
+    def get_translation_entry(self, locale):
+        """Gets the appropriate CMSTranslation for the given locale. If there
+        is no translation available for the given locale None is returned.
+        @return: a CMSTranslation or None
+        """
+        try:
+            return self.translations.filter(locale=locale).latest('timestamp')
+        except CMSTranslation.DoesNotExist:
+            return None
+    
+    def get_current_translation(self):
+        current_language = translation.get_language()
+        transl = self.get_translation_entry(current_language)
+        if transl:
+            return transl.text
+        else:
+            return self.entry_id
     
     def update_translation(self, locale, new_text):
         try:
@@ -135,6 +232,10 @@ class CMSEntry(models.Model):
         
         transl.save()
     
+    def overwrite_translation(self, locale, new_text):
+        self.translations.filter(locale=locale).delete()
+        CMSTranslation.objects.create(entry=self, locale=locale, text=new_text)
+    
     def __unicode__(self):
         return self.entry_id
 
@@ -145,10 +246,6 @@ class CMSEntry(models.Model):
         
         relationships = 0
         if self.page:
-            relationships += 1
-        if self.product_group:
-            relationships += 1
-        if self.product:
             relationships += 1
         
         if relationships > 1:

@@ -3,8 +3,6 @@
         "pk": 3, 
         "model": "salina.cmsentry", 
         "fields": {
-            "product_group": null, 
-            "product": null, 
             "entry_id": "about_top", 
             "description": "Top text on about page", 
             "page": "about"
@@ -14,8 +12,6 @@
         "pk": 1, 
         "model": "salina.cmsentry", 
         "fields": {
-            "product_group": null, 
-            "product": null, 
             "entry_id": "frontpage_howitworks", 
             "description": "How it works text", 
             "page": "index"
@@ -25,8 +21,6 @@
         "pk": 2, 
         "model": "salina.cmsentry", 
         "fields": {
-            "product_group": null, 
-            "product": null, 
             "entry_id": "frontpage_textile", 
             "description": "Textile text", 
             "page": "index"
