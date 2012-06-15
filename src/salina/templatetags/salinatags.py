@@ -10,7 +10,7 @@ from django.utils.encoding import force_unicode
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 
-from salina.models import CMSEntry
+from salina.models import CMSText
 
 register = template.Library()
 
@@ -23,22 +23,21 @@ class CMSTextNode(Node):
         super(CMSTextNode, self).__init__()
         
         self.text_id = text_id
-        self.entry = None
         self.text = None
         
         self.escape_output = False
         
         try:
             current_language = translation.get_language()
-            self.entry = CMSEntry.objects.get(entry_id=self.text_id)
+            cms_text = CMSText.objects.get(entry_id=self.text_id)
             
-            transl = self.entry.get_translation_entry(current_language)
+            transl = cms_text.get_translation_entry(current_language)
             if transl:
                 self.text = transl.text
             else:
                 self.text = CMSTextNode.ALERT_BOX % ('missing translation "%s" (%s)' % (self.text_id, current_language))
             
-        except CMSEntry.DoesNotExist:
+        except CMSText.DoesNotExist:
             self.text = CMSTextNode.ALERT_BOX % ('invalid text "%s"' % self.text_id)
     
     def render(self, context):

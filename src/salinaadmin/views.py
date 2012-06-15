@@ -8,7 +8,7 @@ from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 
-from salina.models import CMSEntry, CMSPage
+from salina.models import CMSText, CMSPage
 
 
 def login(request):
@@ -34,7 +34,7 @@ def index(request):
 @login_required
 def text_index(request):
     pages = CMSPage.objects.all_pages()
-    unassigned_texts = list(CMSEntry.objects.unassigned())
+    unassigned_texts = list(CMSText.objects.unassigned())
     locales = settings.LANGUAGES
     
     return render_to_response("salinaadmin/text_index.html",
@@ -46,17 +46,17 @@ def text_index(request):
 
 @login_required
 def text_edit(request, text_id, locale):
-    text_entry = get_object_or_404(CMSEntry, entry_id=text_id)
+    cms_text = get_object_or_404(CMSText, entry_id=text_id)
     
     if not locale in map(lambda(locale): locale[0], settings.LANGUAGES):
         raise Http404()
     
     if request.method == 'POST':
         new_text = request.POST.get('text', '')
-        text_entry.update_translation(locale, new_text)
+        cms_text.update_translation(locale, new_text)
         return HttpResponseRedirect(reverse(text_index))
     else:
-        transl = text_entry.get_translation_entry(locale)
+        transl = cms_text.get_translation_entry(locale)
         if transl:
             old_text = transl.text
         else:
@@ -68,7 +68,7 @@ def text_edit(request, text_id, locale):
                 break
         
         return render_to_response("salinaadmin/text_edit.html",
-                                  {'text': text_entry, 'old_text': old_text,
+                                  {'text': cms_text, 'old_text': old_text,
                                    'locale_name': locale_name},
                                   context_instance=RequestContext(request))
 

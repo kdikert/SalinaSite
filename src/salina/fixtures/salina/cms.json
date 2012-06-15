@@ -1,7 +1,7 @@
 [
     {
         "pk": 3, 
-        "model": "salina.cmsentry", 
+        "model": "salina.cmstext", 
         "fields": {
             "entry_id": "about_top", 
             "description": "Top text on about page", 
@@ -10,7 +10,7 @@
     }, 
     {
         "pk": 1, 
-        "model": "salina.cmsentry", 
+        "model": "salina.cmstext", 
         "fields": {
             "entry_id": "frontpage_howitworks", 
             "description": "How it works text", 
@@ -19,7 +19,7 @@
     }, 
     {
         "pk": 2, 
-        "model": "salina.cmsentry", 
+        "model": "salina.cmstext", 
         "fields": {
             "entry_id": "frontpage_textile", 
             "description": "Textile text", 
@@ -31,7 +31,7 @@
         "model": "salina.cmstranslation", 
         "fields": {
             "locale": "en", 
-            "entry": 3, 
+            "cms_text": 3, 
             "timestamp": "2012-06-13T12:11:57.043", 
             "text": "Groups can make reuqest for workshops. Workoshops can be at a chosen time and place. We can offer theme workshops.In the workshops we work with all kind of materials and techniques: Frame making, Mosaic, Everyone can copy a famous art work, The first time I ......(participants make an art work about something they did for the first time: first time pregnant, first beer, first book)."
         }
@@ -41,7 +41,7 @@
         "model": "salina.cmstranslation", 
         "fields": {
             "locale": "en", 
-            "entry": 1, 
+            "cms_text": 1, 
             "timestamp": "2012-06-01T00:55:55", 
             "text": "# How it works\r\n\r\nEvery tuesday en thursday evening (19.00 \u2013 22.00 hrs) and wednesday en saaturday morning ( 10.00-13.00 hrs) you can come and work on a piece of your choice. You do not have to register in advance. There are ususally four to six participants.\r\n\r\nYou pay seperate for each session that you participate in, or you can buy a a \u201cfiver\u201dor \u201ctenner\u201d (= card for five of ten sessions). One session costs \u20ac 12,50. You choose when and how often you want to come. You can choose to start work at atelier Salina and finish at home. If at some point you get stuck, you can come back to atelier Salina for one or more sessions.\r\n\r\nEverything you need is present at atelier Salina, but of course you are welcome to bring your own. You pay seperately for the materials you use. Fabrics cost \u20ac 4 per meter, yarn \u20ac 1 per spool. Felt is \u20ac 1 per piece of 20 X 30 cm, wool is \u20ac 1 per 50 gram ball, accessories vary in prices. If you click on one of the images from the carousel above, you'll find information about the time and material each piece costs."
         }
@@ -51,7 +51,7 @@
         "model": "salina.cmstranslation", 
         "fields": {
             "locale": "en", 
-            "entry": 2, 
+            "cms_text": 2, 
             "timestamp": "2012-06-01T00:56:40", 
             "text": "# Textile\r\n\r\nTextile is a material with endless amazing qualities and possibilities. It is felxible, washable, colourful, transparent or opaque, smooth or textured, stretches or not. You can make bags, toys, books, clothing, hats, baskets, cushions, puppets, chairs and much more of it. You can paint it, sew it, glue it, fold it, crease it, wrinkle it, knot it. \r\n\r\n**COME AND DISCOVER YOUR TALENT!**"
         }

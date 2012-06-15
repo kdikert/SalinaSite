@@ -14,11 +14,11 @@ class ProductGroupManager(models.Manager):
     def create(self, group_id):
         cms_text_id = "product_group_%s" % group_id
         cms_text_description = "Name of product group %s" % group_id
-        name_text = CMSEntry.objects.create(entry_id=cms_text_id,
+        name_text = CMSText.objects.create(entry_id=cms_text_id,
                                             description=cms_text_description)
         try:
             product_group = super(ProductGroupManager, self).create(group_id=group_id,
-                                                                    name_entry=name_text)
+                                                                    name_text=name_text)
         except:
             name_text.delete()
             raise
@@ -30,7 +30,7 @@ class ProductGroup(models.Model):
     
     group_id = models.CharField(max_length=64, db_index=True, unique=True)
     
-    name_entry = models.ForeignKey('CMSEntry', related_name='product_group_names')
+    name_text = models.ForeignKey('CMSText', related_name='product_group_names')
     
     objects = ProductGroupManager()
     
@@ -43,7 +43,7 @@ class ProductGroup(models.Model):
 
 def product_group_pre_delete_handler(sender, instance, **kwargs):
     try:
-        instance.name_entry.delete()
+        instance.name_text.delete()
     except:
         pass
 
@@ -52,10 +52,10 @@ pre_delete.connect(product_group_pre_delete_handler, sender=ProductGroup)
 
 class Material(models.Model):
     
-    name_entry = models.ForeignKey('CMSEntry', related_name='material_names')
+    name_text = models.ForeignKey('CMSText', related_name='material_names')
     
     class Meta:
-        ordering = ['name_entry__entry_id']
+        ordering = ['name_text__entry_id']
 
 
 class ProductManager(models.Manager):
@@ -69,7 +69,7 @@ class Product(models.Model):
     product_id = models.CharField(max_length=64, db_index=True, unique=True)
     product_group = models.ForeignKey(ProductGroup, related_name='products')
     
-    name_entry = models.ForeignKey('CMSEntry', related_name='product_names')
+    name_text = models.ForeignKey('CMSText', related_name='product_names')
 
     materials = models.ManyToManyField(Material, through='ProductMaterial')
     
@@ -92,7 +92,7 @@ class ProductMaterial(models.Model):
 
 class ProductPart(models.Model):
     
-    name_entry = models.ForeignKey('CMSEntry')
+    name_text = models.ForeignKey('CMSText')
     product = models.ForeignKey(Product, related_name='parts')
     
     time_min = models.PositiveIntegerField()
@@ -151,19 +151,19 @@ class CMSPage(object):
         self.description = description
     
     def get_texts(self):
-        return CMSEntry.objects.filter(page=self.page_id)
+        return CMSText.objects.filter(page=self.page_id)
     
     def __unicode__(self):
         return self.description
 
 
-class CMSEntryManager(models.Manager):
+class CMSTextManager(models.Manager):
     
     def unassigned(self):
         return self.filter(page=None)
 
 
-class CMSEntry(models.Model):
+class CMSText(models.Model):
     
     entry_id = models.CharField(max_length=128, db_index=True, unique=True)
     
@@ -171,7 +171,7 @@ class CMSEntry(models.Model):
     
     page = models.CharField(max_length=40, null=True, blank=True)
     
-    objects = CMSEntryManager()
+    objects = CMSTextManager()
     
     class Meta:
         verbose_name_plural = "cms entries"
@@ -228,13 +228,13 @@ class CMSEntry(models.Model):
             transl = None
             
         if not transl:
-            transl = CMSTranslation(entry=self, locale=locale, text=new_text)
+            transl = CMSTranslation(cms_text=self, locale=locale, text=new_text)
         
         transl.save()
     
     def overwrite_translation(self, locale, new_text):
         self.translations.filter(locale=locale).delete()
-        CMSTranslation.objects.create(entry=self, locale=locale, text=new_text)
+        CMSTranslation.objects.create(cms_text=self, locale=locale, text=new_text)
     
     def __unicode__(self):
         return self.entry_id
@@ -251,12 +251,12 @@ class CMSEntry(models.Model):
         if relationships > 1:
             raise IntegrityError("CMS Text can be related to only one object")
         
-        return super(CMSEntry, self).save(*args, **kwargs)
+        return super(CMSText, self).save(*args, **kwargs)
 
 
 class CMSTranslation(models.Model):
     
-    entry = models.ForeignKey(CMSEntry, related_name='translations')
+    cms_text = models.ForeignKey(CMSText, related_name='translations')
     
     locale = models.CharField(max_length=5, db_index=True)
     
@@ -265,10 +265,10 @@ class CMSTranslation(models.Model):
     timestamp = models.DateTimeField(db_index=True, default=datetime.now)
     
     class Meta:
-        unique_together = [('entry', 'locale', 'timestamp'), ]
-        ordering = ['entry__entry_id', 'locale', '-timestamp']
+        unique_together = [('cms_text', 'locale', 'timestamp'), ]
+        ordering = ['cms_text__entry_id', 'locale', '-timestamp']
     
     def __unicode__(self):
-        return "%s (%s %s)" % (self.entry.entry_id, self.locale,
+        return "%s (%s %s)" % (self.cms_text.entry_id, self.locale,
                                self.timestamp.strftime('%Y-%m-%d %H:%M'))
 

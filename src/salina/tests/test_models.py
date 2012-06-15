@@ -4,8 +4,7 @@ from datetime import datetime
 
 from django.test import TestCase
 
-from salina.models import CMSEntry as CMSText
-from salina.models import ProductGroup
+from salina.models import *   #@UnusedWildImport
 
 
 class TestProductGroup(TestCase):
@@ -15,7 +14,7 @@ class TestProductGroup(TestCase):
         
         product_group = ProductGroup.objects.create("test_group")
         
-        self.assertIsNotNone(product_group.name_entry)
+        self.assertIsNotNone(product_group.name_text)
         self.assertEqual(CMSText.objects.all().count(), 1)
         
         text = CMSText.objects.get()
@@ -24,7 +23,7 @@ class TestProductGroup(TestCase):
     def test_delete_removes_cms_text(self):
         CMSText.objects.create(entry_id='unrelated_entry', description='')
         product_group = ProductGroup.objects.create("test_group")
-        self.assertIsNotNone(product_group.name_entry)
+        self.assertIsNotNone(product_group.name_text)
         self.assertEqual(CMSText.objects.all().count(), 2)
         
         product_group.delete()
