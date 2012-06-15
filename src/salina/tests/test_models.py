@@ -64,6 +64,9 @@ class TestCMSText(TestCase):
     def setUp(self):
         self.text = CMSText.objects.create(entry_id='test_text', description="desc")
     
+    def test_unicode(self):
+        self.assertEqual(str(self.text), "test_text")
+    
     def test_get_translation_entries_per_locale_with_no_translations(self):
         entries = self.text.get_translation_entries_per_locale()
         
@@ -117,3 +120,13 @@ class TestCMSText(TestCase):
         translation = self.text.translations.get()
         self.assertEqual(translation.timestamp, datetime(2012, 1, 8, 0, 0))
         self.assertEqual(translation.text, "text en")
+    
+    def test_get_translation_gets_latest_version_of_text(self):
+        self.text.translations.create(locale='en', text="en 1", timestamp=datetime(2012, 1, 6, 0, 0))
+        self.text.translations.create(locale='en', text="en 2", timestamp=datetime(2012, 1, 8, 0, 0))
+        self.text.translations.create(locale='en', text="en 3", timestamp=datetime(2012, 1, 7, 0, 0))
+        
+        text = self.text.get_current_translation()
+        
+        self.assertEqual(text, "en 2")
+
