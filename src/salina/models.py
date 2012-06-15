@@ -15,7 +15,7 @@ class ProductGroupManager(models.Manager):
         cms_text_id = "product_group_%s" % group_id
         cms_text_description = "Name of product group %s" % group_id
         name_text = CMSText.objects.create(entry_id=cms_text_id,
-                                            description=cms_text_description)
+                                           description=cms_text_description)
         try:
             product_group = super(ProductGroupManager, self).create(group_id=group_id,
                                                                     name_text=name_text)
@@ -40,7 +40,6 @@ class ProductGroup(models.Model):
     def __unicode__(self):
         return "%s" % (self.group_id)
 
-
 def product_group_pre_delete_handler(sender, instance, **kwargs):
     try:
         instance.name_text.delete()
@@ -61,22 +60,42 @@ class Material(models.Model):
 class ProductManager(models.Manager):
     
     def create(self, product_id, product_group):
-        pass
+        cms_text_id = "product_%s" % product_id
+        cms_text_description = "Name of product %s" % product_id
+        name_text = CMSText.objects.create(entry_id=cms_text_id,
+                                           description=cms_text_description)
+        try:
+            product = super(ProductManager, self).create(product_id=product_id,
+                                                         product_group=product_group,
+                                                         name_text=name_text)
+        except:
+            name_text.delete()
+            raise
+        
+        return product
 
     
 class Product(models.Model):
     
     product_id = models.CharField(max_length=64, db_index=True, unique=True)
-    product_group = models.ForeignKey(ProductGroup, related_name='products')
+    product_group = models.ForeignKey(ProductGroup, related_name='products', null=False)
     
     name_text = models.ForeignKey('CMSText', related_name='product_names')
-
+    
     materials = models.ManyToManyField(Material, through='ProductMaterial')
     
     objects = ProductManager()
     
     class Meta:
         ordering = ['product_id']
+
+def product_pre_delete_handler(sender, instance, **kwargs):
+    try:
+        instance.name_text.delete()
+    except:
+        pass
+
+pre_delete.connect(product_pre_delete_handler, sender=Product)
 
 
 class ProductMaterial(models.Model):
