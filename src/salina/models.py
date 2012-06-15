@@ -231,15 +231,19 @@ class CMSText(models.Model):
         else:
             return self.entry_id
     
-    def update_translation(self, locale, new_text):
+    def update_translation(self, locale, new_text, update_time=datetime.now()):
+        
+        if not locale in [lang[0] for lang in settings.LANGUAGES]:
+            raise Exception("Locale %s not supported" % locale)
+        
         try:
             transl = self.translations.filter(locale=locale).latest('timestamp')
             
             treshold = timedelta(seconds=settings.SALINA_CMS_TEXT_AMEND_TRESHOLD_SECONDS)
-            if datetime.now() - transl.timestamp < treshold:
+            if update_time - transl.timestamp < treshold:
                 logging.debug("Amending to previous entry (%s)", transl)
                 transl.text = new_text
-                transl.timestamp = datetime.now()
+                transl.timestamp = update_time
             else:
                 logging.debug("Previous entry too old (%s)", transl)
                 transl = None
@@ -247,13 +251,18 @@ class CMSText(models.Model):
             transl = None
             
         if not transl:
-            transl = CMSTranslation(cms_text=self, locale=locale, text=new_text)
+            transl = CMSTranslation(cms_text=self, locale=locale, text=new_text, timestamp=update_time)
         
         transl.save()
     
-    def overwrite_translation(self, locale, new_text):
+    def overwrite_translation(self, locale, new_text, update_time=datetime.now()):
+        
+        if not locale in [lang[0] for lang in settings.LANGUAGES]:
+            raise Exception("Locale %s not supported" % locale)
+        
         self.translations.filter(locale=locale).delete()
-        CMSTranslation.objects.create(cms_text=self, locale=locale, text=new_text)
+        CMSTranslation.objects.create(cms_text=self, locale=locale,
+                                      text=new_text, timestamp=update_time)
     
     def __unicode__(self):
         return self.entry_id
