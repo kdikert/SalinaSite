@@ -142,6 +142,11 @@ p, div.section {
 	color: red;
 }
 
+.edit, .edit:VISITED {
+	font-size: smaller;
+	color: #00F;
+}
+
 tr.text_group td {
 	font-size: smaller;
 	padding-top: 1em;
@@ -150,6 +155,7 @@ tr.text_group td {
 .submit_button {
 }
 
-.cancel_button {
-	padding-left: 1em;
+.cancel_button, .cancel_button:VISITED {
+	margin-left: 1em;
+	color: #00F;
 }

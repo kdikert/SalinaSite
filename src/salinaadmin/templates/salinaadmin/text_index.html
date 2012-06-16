@@ -32,7 +32,7 @@
             {% else %}
             <span class="error">{% trans "Unavailable" %}</span>
             {% endif %}
-            (<a href="{% url admin_text_edit text.entry_id locale_code %}">{% trans "Edit" %}</a>)
+            (<a class="edit" href="{% url admin_text_edit text.entry_id locale_code %}">{% trans "Edit" %}</a>)
         </td>
         {% endfor %}
     </tr>
@@ -47,11 +47,15 @@
         {% for locale_code, transl in text.get_translation_entries_per_locale %}
         <td>
             {% if transl %}
-            {% trans "Updated" %} {{transl.timestamp|date:"DATE_FORMAT"}}
+                {% if text.short %}
+                    {{transl.text}}
+                {% else %}
+                    {% trans "Updated" %} {{transl.timestamp|date:"DATE_FORMAT"}}
+                {% endif %}
             {% else %}
-            <span class="error">{% trans "Unavailable" %}</span>
+                <span class="error">{% trans "Unavailable" %}</span>
             {% endif %}
-            (<a href="{% url admin_text_edit text.entry_id locale_code %}">{% trans "Edit" %}</a>)
+            (<a class="edit" href="{% url admin_text_edit text.entry_id locale_code %}">{% trans "Edit" %}</a>)
         </td>
         {% endfor %}
     </tr>

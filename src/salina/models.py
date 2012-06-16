@@ -26,7 +26,8 @@ def material_pre_save_handler(sender, instance, **kwargs):
         cms_text_id = "material_%s" % instance.material_id
         cms_text_description = "Material %s" % instance.material_id
         name_text = CMSText.objects.create(entry_id=cms_text_id,
-                                           description=cms_text_description)
+                                           description=cms_text_description,
+                                           short=True)
         instance.name_text = name_text
 
 pre_save.connect(material_pre_save_handler, sender=Material)
@@ -57,7 +58,8 @@ def product_group_pre_save_handler(sender, instance, **kwargs):
         cms_text_id = "productgroup_%s" % instance.group_id
         cms_text_description = "Product group %s" % instance.group_id
         name_text = CMSText.objects.create(entry_id=cms_text_id,
-                                           description=cms_text_description)
+                                           description=cms_text_description,
+                                           short=True)
         instance.name_text = name_text
 
 pre_save.connect(product_group_pre_save_handler, sender=ProductGroup)
@@ -88,7 +90,8 @@ def product_pre_save_handler(sender, instance, **kwargs):
         cms_text_id = "product_%s" % instance.product_id
         cms_text_description = "Product %s" % instance.product_id
         name_text = CMSText.objects.create(entry_id=cms_text_id,
-                                           description=cms_text_description)
+                                           description=cms_text_description,
+                                           short=True)
         instance.name_text = name_text
 
 pre_save.connect(product_pre_save_handler, sender=Product)
@@ -191,6 +194,8 @@ class CMSText(models.Model):
     entry_id = models.CharField(max_length=128, db_index=True, unique=True)
     
     description = models.TextField()
+    
+    short = models.BooleanField(default=False)
     
     page = models.CharField(max_length=40, null=True, blank=True)
     

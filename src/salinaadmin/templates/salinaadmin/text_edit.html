@@ -20,7 +20,11 @@
 <form action="" method="post">
     {% csrf_token %}
     <div class="section">
-        <textarea name="text" rows="20" cols="80">{{old_text}}</textarea>
+        {% if text.short %}
+            <input type="text" name="text" value="{{old_text}}"/>
+        {% else %}
+            <textarea name="text" rows="20" cols="80">{{old_text}}</textarea>
+        {% endif %}
     </div>
     <div class="section">
         <input class="submit_button" type="submit" value="{% trans 'Save' %}"/>
