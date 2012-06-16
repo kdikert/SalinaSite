@@ -37,36 +37,27 @@ def material_pre_delete_handler(sender, instance, **kwargs):
 pre_delete.connect(material_pre_delete_handler, sender=Material)
 
 
-class ProductGroupManager(models.Manager):
-    
-    def create(self, group_id):
-        cms_text_id = "productgroup_%s" % group_id
-        cms_text_description = "Name of product group %s" % group_id
-        name_text = CMSText.objects.create(entry_id=cms_text_id,
-                                           description=cms_text_description)
-        try:
-            product_group = super(ProductGroupManager, self).create(group_id=group_id,
-                                                                    name_text=name_text)
-        except:
-            name_text.delete()
-            raise
-        
-        return product_group
-
-
 class ProductGroup(models.Model):
     
     group_id = models.CharField(max_length=64, db_index=True, unique=True)
     
-    name_text = models.ForeignKey('CMSText', related_name='product_group_names')
-    
-    objects = ProductGroupManager()
+    name_text = models.ForeignKey('CMSText', related_name='product_group_names', editable=False)
     
     class Meta:
         ordering = ['group_id']
     
     def __unicode__(self):
         return "%s" % (self.group_id)
+
+def product_group_pre_save_handler(sender, instance, **kwargs):
+    if instance.name_text_id is None:
+        cms_text_id = "productgroup_%s" % instance.group_id
+        cms_text_description = "Name of product group %s" % instance.group_id
+        name_text = CMSText.objects.create(entry_id=cms_text_id,
+                                           description=cms_text_description)
+        instance.name_text = name_text
+
+pre_save.connect(product_group_pre_save_handler, sender=ProductGroup)
 
 def product_group_pre_delete_handler(sender, instance, **kwargs):
     try:
@@ -77,37 +68,27 @@ def product_group_pre_delete_handler(sender, instance, **kwargs):
 pre_delete.connect(product_group_pre_delete_handler, sender=ProductGroup)
 
 
-class ProductManager(models.Manager):
-    
-    def create(self, product_id, product_group):
-        cms_text_id = "product_%s" % product_id
-        cms_text_description = "Name of product %s" % product_id
-        name_text = CMSText.objects.create(entry_id=cms_text_id,
-                                           description=cms_text_description)
-        try:
-            product = super(ProductManager, self).create(product_id=product_id,
-                                                         product_group=product_group,
-                                                         name_text=name_text)
-        except:
-            name_text.delete()
-            raise
-        
-        return product
-
-    
 class Product(models.Model):
     
     product_id = models.CharField(max_length=64, db_index=True, unique=True)
     product_group = models.ForeignKey(ProductGroup, related_name='products', null=False)
     
-    name_text = models.ForeignKey('CMSText', related_name='product_names')
+    name_text = models.ForeignKey('CMSText', related_name='product_names', editable=False)
     
     materials = models.ManyToManyField(Material, through='ProductMaterial')
     
-    objects = ProductManager()
-    
     class Meta:
         ordering = ['product_id']
+
+def product_pre_save_handler(sender, instance, **kwargs):
+    if instance.name_text_id is None:
+        cms_text_id = "product_%s" % instance.product_id
+        cms_text_description = "Name of product %s" % instance.product_id
+        name_text = CMSText.objects.create(entry_id=cms_text_id,
+                                           description=cms_text_description)
+        instance.name_text = name_text
+
+pre_save.connect(product_pre_save_handler, sender=Product)
 
 def product_pre_delete_handler(sender, instance, **kwargs):
     try:

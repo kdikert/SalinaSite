@@ -35,7 +35,7 @@ class TestProductGroup(TestCase):
     def test_create_creates_cms_text(self):
         self.assertEqual(CMSText.objects.all().count(), 0)
         
-        product_group = ProductGroup.objects.create("test_group")
+        product_group = ProductGroup.objects.create(group_id="test_group")
         
         self.assertIsNotNone(product_group.name_text)
         self.assertEqual(CMSText.objects.all().count(), 1)
@@ -45,7 +45,7 @@ class TestProductGroup(TestCase):
     
     def test_delete_removes_cms_text(self):
         CMSText.objects.create(entry_id='unrelated_entry', description='')
-        product_group = ProductGroup.objects.create("test_group")
+        product_group = ProductGroup.objects.create(group_id="test_group")
         self.assertIsNotNone(product_group.name_text)
         self.assertEqual(CMSText.objects.all().count(), 2)
         
@@ -59,12 +59,13 @@ class TestProductGroup(TestCase):
 class TestProduct(TestCase):
     
     def setUp(self):
-        self.product_group = ProductGroup.objects.create("test_group")
+        self.product_group = ProductGroup.objects.create(group_id="test_group")
     
     def test_create_creates_cms_text(self):
         self.assertEqual(CMSText.objects.all().count(), 1)
         
-        product = Product.objects.create("product1", self.product_group)
+        product = Product.objects.create(product_id="product1",
+                                         product_group=self.product_group)
         
         self.assertIsNotNone(product.name_text)
         self.assertEqual(CMSText.objects.all().count(), 2)
@@ -73,7 +74,8 @@ class TestProduct(TestCase):
     
     def test_delete_removes_cms_text(self):
         CMSText.objects.create(entry_id='unrelated_entry', description='')
-        product = Product.objects.create("product1", self.product_group)
+        product = Product.objects.create(product_id="product1",
+                                         product_group=self.product_group)
         
         self.assertEqual(CMSText.objects.all().count(), 3)
         self.assertEqual(CMSText.objects.filter(entry_id="product_product1").count(), 1)
