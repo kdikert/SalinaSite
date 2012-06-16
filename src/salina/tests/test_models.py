@@ -5,6 +5,31 @@ from django.test import TestCase
 from salina.models import *   #@UnusedWildImport
 
 
+class TestMaterial(TestCase):
+    
+    def test_create_creates_cms_text(self):
+        self.assertEqual(CMSText.objects.all().count(), 0)
+        
+        material = Material.objects.create(material_id="mat1")
+        
+        self.assertIsNotNone(material.name_text)
+        self.assertEqual(CMSText.objects.all().count(), 1)
+        
+        self.assertEqual(CMSText.objects.filter(entry_id="material_mat1").count(), 1)
+    
+    def test_delete_removes_cms_text(self):
+        CMSText.objects.create(entry_id='unrelated_entry', description='')
+        material = Material.objects.create(material_id="mat1")
+        
+        self.assertEqual(CMSText.objects.all().count(), 2)
+        self.assertEqual(CMSText.objects.filter(entry_id="material_mat1").count(), 1)
+        
+        material.delete()
+        
+        self.assertEqual(CMSText.objects.all().count(), 1)
+        self.assertEqual(CMSText.objects.filter(entry_id="material_mat1").count(), 0)
+
+
 class TestProductGroup(TestCase):
     
     def test_create_creates_cms_text(self):
@@ -16,7 +41,7 @@ class TestProductGroup(TestCase):
         self.assertEqual(CMSText.objects.all().count(), 1)
         
         text = CMSText.objects.get()
-        self.assertEqual(text.entry_id, "product_group_test_group")
+        self.assertEqual(text.entry_id, "productgroup_test_group")
     
     def test_delete_removes_cms_text(self):
         CMSText.objects.create(entry_id='unrelated_entry', description='')
@@ -44,7 +69,7 @@ class TestProduct(TestCase):
         self.assertIsNotNone(product.name_text)
         self.assertEqual(CMSText.objects.all().count(), 2)
         
-        CMSText.objects.get(entry_id="product_product1")
+        self.assertEqual(CMSText.objects.filter(entry_id="product_product1").count(), 1)
     
     def test_delete_removes_cms_text(self):
         CMSText.objects.create(entry_id='unrelated_entry', description='')

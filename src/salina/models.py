@@ -6,13 +6,41 @@ from django.conf import settings
 from django.db import models
 from django.db.utils import IntegrityError
 from django.utils import translation
-from django.db.models.signals import pre_delete
+from django.db.models.signals import pre_delete, pre_save
+
+
+class Material(models.Model):
+    
+    material_id = models.CharField(max_length=64, db_index=True, unique=True)
+    
+    name_text = models.ForeignKey('CMSText', related_name='material_names', editable=False)
+    
+    class Meta:
+        ordering = ['material_id']
+
+def material_pre_save_handler(sender, instance, **kwargs):
+    if instance.name_text_id is None:
+        cms_text_id = "material_%s" % instance.material_id
+        cms_text_description = "Name of material %s" % instance.material_id
+        name_text = CMSText.objects.create(entry_id=cms_text_id,
+                                           description=cms_text_description)
+        instance.name_text = name_text
+
+pre_save.connect(material_pre_save_handler, sender=Material)
+
+def material_pre_delete_handler(sender, instance, **kwargs):
+    try:
+        instance.name_text.delete()
+    except:
+        pass
+
+pre_delete.connect(material_pre_delete_handler, sender=Material)
 
 
 class ProductGroupManager(models.Manager):
     
     def create(self, group_id):
-        cms_text_id = "product_group_%s" % group_id
+        cms_text_id = "productgroup_%s" % group_id
         cms_text_description = "Name of product group %s" % group_id
         name_text = CMSText.objects.create(entry_id=cms_text_id,
                                            description=cms_text_description)
@@ -47,14 +75,6 @@ def product_group_pre_delete_handler(sender, instance, **kwargs):
         pass
 
 pre_delete.connect(product_group_pre_delete_handler, sender=ProductGroup)
-
-
-class Material(models.Model):
-    
-    name_text = models.ForeignKey('CMSText', related_name='material_names')
-    
-    class Meta:
-        ordering = ['name_text__entry_id']
 
 
 class ProductManager(models.Manager):
@@ -102,11 +122,11 @@ class ProductMaterial(models.Model):
     
     material = models.ForeignKey(Material)
     product = models.ForeignKey(Product)
-    ordering = models.PositiveIntegerField()
+    ordering_index = models.PositiveIntegerField()
     
     class Meta:
-        unique_together = [('product', 'ordering')]
-        ordering = ['ordering']
+        unique_together = [('product', 'ordering_index')]
+        ordering = ['ordering_index']
 
 
 class ProductPart(models.Model):
@@ -123,13 +143,13 @@ class ProductPart(models.Model):
 
 class ProductPartMaterial(models.Model):
     
-    product_material = models.ForeignKey(Material)
+    product_material = models.ForeignKey(ProductMaterial)
     product_part = models.ForeignKey(ProductPart, related_name='materials')
     
     amount = models.CharField(max_length=64)
     
     class Meta:
-        ordering = ['product_material__ordering']
+        ordering = ['product_material__ordering_index']
 
 
 KNOWN_PAGES = (
