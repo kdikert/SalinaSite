@@ -1,8 +1,41 @@
 [
     {
+        "pk": 1, 
+        "model": "salina.material", 
+        "fields": {
+            "name_text": 4, 
+            "material_id": "fabric"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "salina.material", 
+        "fields": {
+            "name_text": 5, 
+            "material_id": "fabric_wool"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "salina.material", 
+        "fields": {
+            "name_text": 7, 
+            "material_id": "other"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "salina.material", 
+        "fields": {
+            "name_text": 6, 
+            "material_id": "yarn"
+        }
+    }, 
+    {
         "pk": 3, 
         "model": "salina.cmstext", 
         "fields": {
+            "short": false, 
             "entry_id": "about_top", 
             "description": "Top text on about page", 
             "page": "about"
@@ -12,6 +45,7 @@
         "pk": 1, 
         "model": "salina.cmstext", 
         "fields": {
+            "short": false, 
             "entry_id": "frontpage_howitworks", 
             "description": "How it works text", 
             "page": "index"
@@ -21,9 +55,50 @@
         "pk": 2, 
         "model": "salina.cmstext", 
         "fields": {
+            "short": false, 
             "entry_id": "frontpage_textile", 
             "description": "Textile text", 
             "page": "index"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "material_fabric", 
+            "description": "Material fabric", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "material_fabric_wool", 
+            "description": "Material fabric_wool", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "material_other", 
+            "description": "Material other", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "material_yarn", 
+            "description": "Material yarn", 
+            "page": null
         }
     }, 
     {
@@ -31,9 +106,9 @@
         "model": "salina.cmstranslation", 
         "fields": {
             "locale": "en", 
-            "cms_text": 3, 
+            "text": "Groups can make reuqest for workshops. Workoshops can be at a chosen time and place. We can offer theme workshops.In the workshops we work with all kind of materials and techniques: Frame making, Mosaic, Everyone can copy a famous art work, The first time I ......(participants make an art work about something they did for the first time: first time pregnant, first beer, first book).", 
             "timestamp": "2012-06-13T12:11:57.043", 
-            "text": "Groups can make reuqest for workshops. Workoshops can be at a chosen time and place. We can offer theme workshops.In the workshops we work with all kind of materials and techniques: Frame making, Mosaic, Everyone can copy a famous art work, The first time I ......(participants make an art work about something they did for the first time: first time pregnant, first beer, first book)."
+            "cms_text": 3
         }
     }, 
     {
@@ -41,9 +116,9 @@
         "model": "salina.cmstranslation", 
         "fields": {
             "locale": "en", 
-            "cms_text": 1, 
+            "text": "# How it works\r\n\r\nEvery tuesday en thursday evening (19.00 \u2013 22.00 hrs) and wednesday en saaturday morning ( 10.00-13.00 hrs) you can come and work on a piece of your choice. You do not have to register in advance. There are ususally four to six participants.\r\n\r\nYou pay seperate for each session that you participate in, or you can buy a a \u201cfiver\u201dor \u201ctenner\u201d (= card for five of ten sessions). One session costs \u20ac 12,50. You choose when and how often you want to come. You can choose to start work at atelier Salina and finish at home. If at some point you get stuck, you can come back to atelier Salina for one or more sessions.\r\n\r\nEverything you need is present at atelier Salina, but of course you are welcome to bring your own. You pay seperately for the materials you use. Fabrics cost \u20ac 4 per meter, yarn \u20ac 1 per spool. Felt is \u20ac 1 per piece of 20 X 30 cm, wool is \u20ac 1 per 50 gram ball, accessories vary in prices. If you click on one of the images from the carousel above, you'll find information about the time and material each piece costs.", 
             "timestamp": "2012-06-01T00:55:55", 
-            "text": "# How it works\r\n\r\nEvery tuesday en thursday evening (19.00 \u2013 22.00 hrs) and wednesday en saaturday morning ( 10.00-13.00 hrs) you can come and work on a piece of your choice. You do not have to register in advance. There are ususally four to six participants.\r\n\r\nYou pay seperate for each session that you participate in, or you can buy a a \u201cfiver\u201dor \u201ctenner\u201d (= card for five of ten sessions). One session costs \u20ac 12,50. You choose when and how often you want to come. You can choose to start work at atelier Salina and finish at home. If at some point you get stuck, you can come back to atelier Salina for one or more sessions.\r\n\r\nEverything you need is present at atelier Salina, but of course you are welcome to bring your own. You pay seperately for the materials you use. Fabrics cost \u20ac 4 per meter, yarn \u20ac 1 per spool. Felt is \u20ac 1 per piece of 20 X 30 cm, wool is \u20ac 1 per 50 gram ball, accessories vary in prices. If you click on one of the images from the carousel above, you'll find information about the time and material each piece costs."
+            "cms_text": 1
         }
     }, 
     {
@@ -51,9 +126,89 @@
         "model": "salina.cmstranslation", 
         "fields": {
             "locale": "en", 
-            "cms_text": 2, 
+            "text": "# Textile\r\n\r\nTextile is a material with endless amazing qualities and possibilities. It is felxible, washable, colourful, transparent or opaque, smooth or textured, stretches or not. You can make bags, toys, books, clothing, hats, baskets, cushions, puppets, chairs and much more of it. You can paint it, sew it, glue it, fold it, crease it, wrinkle it, knot it. \r\n\r\n**COME AND DISCOVER YOUR TALENT!**", 
             "timestamp": "2012-06-01T00:56:40", 
-            "text": "# Textile\r\n\r\nTextile is a material with endless amazing qualities and possibilities. It is felxible, washable, colourful, transparent or opaque, smooth or textured, stretches or not. You can make bags, toys, books, clothing, hats, baskets, cushions, puppets, chairs and much more of it. You can paint it, sew it, glue it, fold it, crease it, wrinkle it, knot it. \r\n\r\n**COME AND DISCOVER YOUR TALENT!**"
+            "cms_text": 2
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Fabric", 
+            "timestamp": "2012-06-16T14:53:47.836", 
+            "cms_text": 4
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Stof", 
+            "timestamp": "2012-06-16T14:53:47.836", 
+            "cms_text": 4
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Fabric/Wool", 
+            "timestamp": "2012-06-16T14:53:47.836", 
+            "cms_text": 5
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Stof/Wol", 
+            "timestamp": "2012-06-16T14:53:47.836", 
+            "cms_text": 5
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Other material", 
+            "timestamp": "2012-06-16T14:53:47.836", 
+            "cms_text": 7
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Overig materiaal", 
+            "timestamp": "2012-06-16T14:53:47.836", 
+            "cms_text": 7
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Yarn", 
+            "timestamp": "2012-06-16T14:53:47.836", 
+            "cms_text": 6
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Garen", 
+            "timestamp": "2012-06-16T14:53:47.836", 
+            "cms_text": 6
         }
     }
 ]
