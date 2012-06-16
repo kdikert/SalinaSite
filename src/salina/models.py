@@ -15,13 +15,16 @@ class Material(models.Model):
     
     name_text = models.ForeignKey('CMSText', related_name='material_names', editable=False)
     
+    def __unicode__(self):
+        return "%s" % (self.material_id)
+    
     class Meta:
         ordering = ['material_id']
 
 def material_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
         cms_text_id = "material_%s" % instance.material_id
-        cms_text_description = "Name of material %s" % instance.material_id
+        cms_text_description = "Material %s" % instance.material_id
         name_text = CMSText.objects.create(entry_id=cms_text_id,
                                            description=cms_text_description)
         instance.name_text = name_text
@@ -52,7 +55,7 @@ class ProductGroup(models.Model):
 def product_group_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
         cms_text_id = "productgroup_%s" % instance.group_id
-        cms_text_description = "Name of product group %s" % instance.group_id
+        cms_text_description = "Product group %s" % instance.group_id
         name_text = CMSText.objects.create(entry_id=cms_text_id,
                                            description=cms_text_description)
         instance.name_text = name_text
@@ -83,7 +86,7 @@ class Product(models.Model):
 def product_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
         cms_text_id = "product_%s" % instance.product_id
-        cms_text_description = "Name of product %s" % instance.product_id
+        cms_text_description = "Product %s" % instance.product_id
         name_text = CMSText.objects.create(entry_id=cms_text_id,
                                            description=cms_text_description)
         instance.name_text = name_text
