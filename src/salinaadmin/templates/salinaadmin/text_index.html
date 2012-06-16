@@ -24,17 +24,7 @@
     {% for text in page.get_texts %}
     <tr>
         <td></td>
-        <td class="text_desc">{{text.description}}</td>
-        {% for locale_code, transl in text.get_translation_entries_per_locale %}
-        <td>
-            {% if transl %}
-            {% trans "Updated" %} {{transl.timestamp|date:"DATE_FORMAT"}}
-            {% else %}
-            <span class="error">{% trans "Unavailable" %}</span>
-            {% endif %}
-            (<a class="edit" href="{% url admin_text_locale_edit text.entry_id locale_code %}">{% trans "Edit" %}</a>)
-        </td>
-        {% endfor %}
+        {% include "salinaadmin/text_index_snippet.html" %}
     </tr>
     {% endfor %}
     {% endfor %}
@@ -43,28 +33,7 @@
     {% for text in unassigned_texts %}
     <tr>
         <td></td>
-        <td class="text_desc">
-            {{text.description}}
-            {% if text.short %}
-                (<a class="edit" href="{% url admin_text_edit text.entry_id %}">{% trans "Edit" %}</a>)
-            {% endif %}
-        </td>
-        {% for locale_code, transl in text.get_translation_entries_per_locale %}
-        <td>
-            {% if transl %}
-                {% if text.short %}
-                    {{transl.text}}
-                {% else %}
-                    {% trans "Updated" %} {{transl.timestamp|date:"DATE_FORMAT"}}
-                {% endif %}
-            {% else %}
-                <span class="error">{% trans "Unavailable" %}</span>
-            {% endif %}
-            {% if not text.short %}
-                (<a class="edit" href="{% url admin_text_locale_edit text.entry_id locale_code %}">{% trans "Edit" %}</a>)
-            {% endif %}
-        </td>
-        {% endfor %}
+        {% include "salinaadmin/text_index_snippet.html" %}
     </tr>
     {% endfor %}
     
