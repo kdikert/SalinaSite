@@ -11,6 +11,13 @@ from django.http import HttpResponseRedirect, Http404
 from salina.models import CMSText, CMSPage
 
 
+def _get_locale_name(locale_code):
+    for code, name in settings.LANGUAGES:
+        if code == locale_code:
+            return name
+    return "Unknown language"
+
+
 def login(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse(index))
@@ -45,7 +52,25 @@ def text_index(request):
 
 
 @login_required
-def text_edit(request, text_id, locale):
+def text_edit(request, text_id):
+    cms_text = get_object_or_404(CMSText, entry_id=text_id)
+    
+    if request.method == 'POST':
+        for locale_code, locale_name in settings.LANGUAGES:   #@UnusedVariable
+            new_text = request.POST.get('text_%s' % locale_code, '')
+            cms_text.update_translation(locale_code, new_text)
+        return HttpResponseRedirect(reverse(text_index))
+    else:
+        translations = cms_text.get_translation_entries_per_locale()
+        translations = [(locale, _get_locale_name(locale), transl) for locale, transl in translations]        
+        
+        return render_to_response("salinaadmin/text_edit.html",
+                                  {'text': cms_text, 'translations': translations},
+                                  context_instance=RequestContext(request))
+
+
+@login_required
+def text_locale_edit(request, text_id, locale):
     cms_text = get_object_or_404(CMSText, entry_id=text_id)
     
     if not locale in map(lambda(locale): locale[0], settings.LANGUAGES):
@@ -62,12 +87,9 @@ def text_edit(request, text_id, locale):
         else:
             old_text = ""
         
-        locale_name = ""
-        for locale_code, locale_name in settings.LANGUAGES:
-            if locale_code == locale:
-                break
+        locale_name = _get_locale_name(locale)
         
-        return render_to_response("salinaadmin/text_edit.html",
+        return render_to_response("salinaadmin/text_locale_edit.html",
                                   {'text': cms_text, 'old_text': old_text,
                                    'locale_name': locale_name},
                                   context_instance=RequestContext(request))

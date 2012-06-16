@@ -48,7 +48,7 @@ table, tr, td, th {
 	vertical-align: top;
 }
 
-table {
+p, div.section, table {
 	margin: 1em 0em;
 }
 
@@ -134,8 +134,8 @@ td, th {
 	padding: 2em 4em 1em;
 }
 
-p, div.section {
-	margin: 1em 0em;
+tr.section td, tr.section th {
+	padding-bottom: 1em;
 }
 
 .error {

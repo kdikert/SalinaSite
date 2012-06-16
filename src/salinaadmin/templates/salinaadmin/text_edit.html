@@ -10,22 +10,26 @@
 </h1>
 
  
-<div class="section">
-    <table>
-    <tr><th>{% trans "Description:" %}</th><td>{{ text.description }}</td></tr>
-    <tr><th>{% trans "Language:" %}</th><td>{{ locale_name }}</td></tr>
-    </table>
-</div>
-
 <form action="" method="post">
     {% csrf_token %}
-    <div class="section">
+    <table>
+    <tr class="section">
+        <th>{% trans "Description:" %}</th><td>{{ text.description }}</td>
+    </tr>
+    {% for locale_code, locale_name, transl in translations %}
+    <tr>
+        <th>{{locale_name}}</th>
+        <td>
         {% if text.short %}
-            <input type="text" name="text" value="{{old_text}}"/>
+            <input type="text" name="text_{{locale_code}}" value="{% if transl %}{{transl.text}}{% endif %}"/>
         {% else %}
-            <textarea name="text" rows="20" cols="80">{{old_text}}</textarea>
+            <textarea name="text_{{locale_code}}" rows="20" cols="80">{% if transl %}{{transl.text}}{% endif %}</textarea>
         {% endif %}
-    </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+    
     <div class="section">
         <input class="submit_button" type="submit" value="{% trans 'Save' %}"/>
         <a class="cancel_button" href="{% url admin_text_index %}">{% trans "Cancel" %}</a>

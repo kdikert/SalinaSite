@@ -32,7 +32,7 @@
             {% else %}
             <span class="error">{% trans "Unavailable" %}</span>
             {% endif %}
-            (<a class="edit" href="{% url admin_text_edit text.entry_id locale_code %}">{% trans "Edit" %}</a>)
+            (<a class="edit" href="{% url admin_text_locale_edit text.entry_id locale_code %}">{% trans "Edit" %}</a>)
         </td>
         {% endfor %}
     </tr>
@@ -43,7 +43,12 @@
     {% for text in unassigned_texts %}
     <tr>
         <td></td>
-        <td class="text_desc">{{text.description}}</td>
+        <td class="text_desc">
+            {{text.description}}
+            {% if text.short %}
+                (<a class="edit" href="{% url admin_text_edit text.entry_id %}">{% trans "Edit" %}</a>)
+            {% endif %}
+        </td>
         {% for locale_code, transl in text.get_translation_entries_per_locale %}
         <td>
             {% if transl %}
@@ -55,7 +60,9 @@
             {% else %}
                 <span class="error">{% trans "Unavailable" %}</span>
             {% endif %}
-            (<a class="edit" href="{% url admin_text_edit text.entry_id locale_code %}">{% trans "Edit" %}</a>)
+            {% if not text.short %}
+                (<a class="edit" href="{% url admin_text_locale_edit text.entry_id locale_code %}">{% trans "Edit" %}</a>)
+            {% endif %}
         </td>
         {% endfor %}
     </tr>
