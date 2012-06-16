@@ -245,6 +245,10 @@ class CMSText(models.Model):
         if not locale in [lang[0] for lang in settings.LANGUAGES]:
             raise Exception("Locale %s not supported" % locale)
         
+        if self.short:
+            self.overwrite_translation(locale, new_text, update_time)
+            return
+        
         try:
             transl = self.translations.filter(locale=locale).latest('timestamp')
             
@@ -272,6 +276,9 @@ class CMSText(models.Model):
         self.translations.filter(locale=locale).delete()
         CMSTranslation.objects.create(cms_text=self, locale=locale,
                                       text=new_text, timestamp=update_time)
+    
+    def delete_translation(self, locale):
+        self.translations.filter(locale=locale).delete()
     
     def __unicode__(self):
         return self.entry_id
