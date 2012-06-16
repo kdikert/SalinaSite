@@ -246,7 +246,10 @@ class CMSText(models.Model):
             raise Exception("Locale %s not supported" % locale)
         
         if self.short:
-            self.overwrite_translation(locale, new_text, update_time)
+            if new_text:
+                self.overwrite_translation(locale, new_text, update_time)
+            else:
+                self.delete_translation(locale)
             return
         
         try:
@@ -262,7 +265,7 @@ class CMSText(models.Model):
                 transl = None
         except CMSTranslation.DoesNotExist:
             transl = None
-            
+        
         if not transl:
             transl = CMSTranslation(cms_text=self, locale=locale, text=new_text, timestamp=update_time)
         
