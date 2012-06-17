@@ -133,8 +133,19 @@ class ProductPart(models.Model):
     class Meta:
         order_with_respect_to = 'product'
     
+    def get_columns(self):
+        result = []
+        for material_column in self.product.material_columns.all():
+            try:
+                column = self.columns.get(material_column=material_column)
+            except ProductPartColumn.DoesNotExist:
+                column = None
+            result.append(column)
+        return result
+    
     def __unicode__(self):
-        return "%s part %d" % (self.product, self._order)
+        part_index = self._order + 1
+        return "%s part %d" % (self.product, part_index)
 
 def product_part_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
