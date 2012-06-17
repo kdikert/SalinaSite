@@ -1,6 +1,7 @@
 
 from datetime import datetime, timedelta
 import logging
+import re
 
 from django.conf import settings
 from django.db import models
@@ -150,9 +151,8 @@ class ProductPart(models.Model):
 def product_part_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
         product = instance.product
-        part_index = product.parts.count() + 1
-        cms_text_id = "product_%s_part_%d" % (product.product_id, part_index)
-        cms_text_description = "Product %s part %d" % (product.product_id, part_index)
+        cms_text_id = CMSText.objects.get_free_id('product_part')
+        cms_text_description = "Product %s part" % (product.product_id)
         name_text = CMSText.objects.create(entry_id=cms_text_id,
                                            description=cms_text_description,
                                            short=True)
@@ -175,6 +175,7 @@ class ProductPartColumn(models.Model):
     product_part = models.ForeignKey(ProductPart, related_name='columns')
     
     amount = models.CharField(max_length=64)
+    text = models.ForeignKey('CMSText')
     
     class Meta:
         ordering = ['material_column___order']
@@ -184,6 +185,26 @@ class ProductPartColumn(models.Model):
     
     def __unicode__(self):
         return "%s %s" % (self.product_part, self.material_column.material)
+
+def product_part_column_pre_save_handler(sender, instance, **kwargs):
+    if instance.text_id is None:
+        product = instance.product_part.product
+        cms_text_id = CMSText.objects.get_free_id('product_part_column')
+        cms_text_description = "Product %s part column" % (product.product_id)
+        text = CMSText.objects.create(entry_id=cms_text_id,
+                                      description=cms_text_description,
+                                      short=True)
+        instance.text = text
+
+pre_save.connect(product_part_column_pre_save_handler, sender=ProductPartColumn)
+
+def product_part_column_pre_delete_handler(sender, instance, **kwargs):
+    try:
+        instance.text.delete()
+    except:
+        pass
+
+pre_delete.connect(product_part_column_pre_delete_handler, sender=ProductPartColumn)
 
 
 KNOWN_PAGES = (
@@ -231,6 +252,17 @@ class CMSPage(object):
 
 
 class CMSTextManager(models.Manager):
+    
+    def get_free_id(self, prefix):
+        index = 0
+        
+        existing_entries = self.filter(entry_id__startswith=prefix).order_by('-entry_id')
+        if existing_entries.count():
+            match = re.match('.*_([0-9]+)', existing_entries[0].entry_id)
+            if match:
+                index = int(match.group(1)) + 1
+        
+        return "%s_%d" % (prefix, index)
     
     def unassigned(self):
         return self.filter(page=None)
