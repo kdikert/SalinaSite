@@ -1,0 +1,13 @@
+{% extends "salina/base.html" %}
+{% load i18n %}
+{% load salinatags %}
+
+{% block content %}
+
+<div class="cmscontainer">
+    <h1>{{product_group.name_text.get_current_translation}}</h1>
+    
+    Product group...
+</div>
+
+{% endblock %}

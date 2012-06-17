@@ -5,8 +5,21 @@
 {% block content %}
 
 <div class="cmscontainer">
-    <h1>Atelier</h1>
-    <p>dataaa....</p>
+    {% cms_text atelier_top %}
+</div>
+
+<div class="cmscontainer">
+    <h1>{% trans "Product groups" %}</h1>
+    
+    {% for product_group in product_groups %}
+    <div class="product_group">
+    <h2>{{product_group.name_text.get_current_translation}}</h2>
+    &gt;
+    <a href="{% url atelier_group product_group.group_id %}">
+        {% trans "See alternatives on "%}{{product_group.name_text.get_current_translation|lower}}
+    </a>
+    </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
