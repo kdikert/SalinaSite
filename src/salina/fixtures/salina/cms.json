@@ -32,6 +32,38 @@
         }
     }, 
     {
+        "pk": 1, 
+        "model": "salina.productgroup", 
+        "fields": {
+            "name_text": 8, 
+            "group_id": "bags"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "salina.productgroup", 
+        "fields": {
+            "name_text": 10, 
+            "group_id": "cuddlies"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "salina.productgroup", 
+        "fields": {
+            "name_text": 11, 
+            "group_id": "cushions"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "salina.productgroup", 
+        "fields": {
+            "name_text": 9, 
+            "group_id": "hats"
+        }
+    }, 
+    {
         "pk": 3, 
         "model": "salina.cmstext", 
         "fields": {
@@ -39,6 +71,16 @@
             "entry_id": "about_top", 
             "description": "Top text on about page", 
             "page": "about"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": false, 
+            "entry_id": "atelier_top", 
+            "description": "Top text on atelier page", 
+            "page": "atelier"
         }
     }, 
     {
@@ -102,6 +144,46 @@
         }
     }, 
     {
+        "pk": 8, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "productgroup_bags", 
+            "description": "Product group bags", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "productgroup_cuddlies", 
+            "description": "Product group cuddlies", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "productgroup_cushions", 
+            "description": "Product group cushions", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "productgroup_hats", 
+            "description": "Product group hats", 
+            "page": null
+        }
+    }, 
+    {
         "pk": 3, 
         "model": "salina.cmstranslation", 
         "fields": {
@@ -109,6 +191,16 @@
             "text": "Groups can make reuqest for workshops. Workoshops can be at a chosen time and place. We can offer theme workshops.In the workshops we work with all kind of materials and techniques: Frame making, Mosaic, Everyone can copy a famous art work, The first time I ......(participants make an art work about something they did for the first time: first time pregnant, first beer, first book).", 
             "timestamp": "2012-06-13T12:11:57.043", 
             "cms_text": 3
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "# Atelier\r\n\r\nIn the atelier you can create various items with our guidance. Register for a session...\r\n\r\n# Timetables\r\n\r\n1.7.2012 - 22.7.2012 Some place", 
+            "timestamp": "2012-06-16T16:40:02.477", 
+            "cms_text": 12
         }
     }, 
     {
@@ -209,6 +301,86 @@
             "text": "Garen", 
             "timestamp": "2012-06-16T14:53:47.836", 
             "cms_text": 6
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Bags", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 8
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Tassen", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 8
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Cuddlies", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 10
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Knuffels", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 10
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Cushions", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 11
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Kussens", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 11
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Hats", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 9
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Petten", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 9
         }
     }
 ]
