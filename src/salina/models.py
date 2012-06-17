@@ -80,10 +80,11 @@ class Product(models.Model):
     
     name_text = models.ForeignKey('CMSText', related_name='product_names', editable=False)
     
-    materials = models.ManyToManyField(Material, through='ProductMaterial')
-    
     class Meta:
         ordering = ['product_id']
+    
+    def __unicode__(self):
+        return "%s" % (self.product_id, )
 
 def product_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
@@ -105,15 +106,20 @@ def product_pre_delete_handler(sender, instance, **kwargs):
 pre_delete.connect(product_pre_delete_handler, sender=Product)
 
 
-class ProductMaterial(models.Model):
+class MaterialColumn(models.Model):
     
     material = models.ForeignKey(Material)
-    product = models.ForeignKey(Product)
-    ordering_index = models.PositiveIntegerField()
+    product = models.ForeignKey(Product, related_name='material_columns')
     
     class Meta:
-        unique_together = [('product', 'ordering_index')]
-        ordering = ['ordering_index']
+        order_with_respect_to = 'product'
+        ordering = ['_order']
+    
+    def get_text_translated(self):
+        return self.material.name_text.get_current_translation()
+    
+    def __unicode__(self):
+        return "%s %s" % (self.product, self.material)
 
 
 class ProductPart(models.Model):
@@ -126,17 +132,47 @@ class ProductPart(models.Model):
     
     class Meta:
         order_with_respect_to = 'product'
-
-
-class ProductPartMaterial(models.Model):
     
-    product_material = models.ForeignKey(ProductMaterial)
-    product_part = models.ForeignKey(ProductPart, related_name='materials')
+    def __unicode__(self):
+        return "%s part %d" % (self.product, self._order)
+
+def product_part_pre_save_handler(sender, instance, **kwargs):
+    if instance.name_text_id is None:
+        product = instance.product
+        part_index = product.parts.count() + 1
+        cms_text_id = "product_%s_part_%d" % (product.product_id, part_index)
+        cms_text_description = "Product %s part %d" % (product.product_id, part_index)
+        name_text = CMSText.objects.create(entry_id=cms_text_id,
+                                           description=cms_text_description,
+                                           short=True)
+        instance.name_text = name_text
+
+pre_save.connect(product_part_pre_save_handler, sender=ProductPart)
+
+def product_part_pre_delete_handler(sender, instance, **kwargs):
+    try:
+        instance.name_text.delete()
+    except:
+        pass
+
+pre_delete.connect(product_part_pre_delete_handler, sender=ProductPart)
+
+
+class ProductPartColumn(models.Model):
+    
+    material_column = models.ForeignKey(MaterialColumn)
+    product_part = models.ForeignKey(ProductPart, related_name='columns')
     
     amount = models.CharField(max_length=64)
     
     class Meta:
-        ordering = ['product_material__ordering_index']
+        ordering = ['material_column___order']
+    
+    def get_text_translated(self):
+        return self.amount
+    
+    def __unicode__(self):
+        return "%s %s" % (self.product_part, self.material_column.material)
 
 
 KNOWN_PAGES = (

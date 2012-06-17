@@ -86,6 +86,39 @@ class TestProduct(TestCase):
         self.assertEqual(CMSText.objects.filter(entry_id="product_product1").count(), 0)
 
 
+class TestProductPartColumn(TestCase):
+    
+    def setUp(self):
+        self.product_group = ProductGroup.objects.create(group_id="test_group")
+        self.product = Product.objects.create(product_id="product1",
+                                              product_group=self.product_group)
+        self.mat_yarn = Material.objects.create(material_id="yarn")
+        self.mat_fabric = Material.objects.create(material_id="fabric")
+        self.mat_other = Material.objects.create(material_id="other")
+    
+    def test_ordering(self):
+        MaterialColumn.objects.create(product=self.product, material=self.mat_fabric)
+        MaterialColumn.objects.create(product=self.product, material=self.mat_yarn)
+        MaterialColumn.objects.create(product=self.product, material=self.mat_other)
+        
+        part = ProductPart.objects.create(product=self.product, time_min=30, price=5)
+        
+        for material_column in self.product.material_columns.all():
+            ProductPartColumn.objects.create(material_column=material_column, product_part=part)
+        
+        columns = list(part.columns.all())
+        self.assertEqual(columns[0].material_column.material.material_id, "fabric")
+        self.assertEqual(columns[1].material_column.material.material_id, "yarn")
+        self.assertEqual(columns[2].material_column.material.material_id, "other")
+        
+        self.product.set_materialcolumn_order([2, 1, 3])
+        
+        columns = list(part.columns.all())
+        self.assertEqual(columns[0].material_column.material.material_id, "yarn")
+        self.assertEqual(columns[1].material_column.material.material_id, "fabric")
+        self.assertEqual(columns[2].material_column.material.material_id, "other")
+
+
 class TestCMSText(TestCase):
     
     def setUp(self):
