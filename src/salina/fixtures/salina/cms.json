@@ -64,6 +64,100 @@
         }
     }, 
     {
+        "pk": 1, 
+        "model": "salina.product", 
+        "fields": {
+            "name_text": 14, 
+            "product_group": 1, 
+            "product_id": "bluish"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "salina.materialcolumn", 
+        "fields": {
+            "_order": 0, 
+            "product": 1, 
+            "material": 2
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "salina.materialcolumn", 
+        "fields": {
+            "_order": 1, 
+            "product": 1, 
+            "material": 3
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "salina.materialcolumn", 
+        "fields": {
+            "_order": 2, 
+            "product": 1, 
+            "material": 4
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "salina.productpart", 
+        "fields": {
+            "name_text": 15, 
+            "_order": 0, 
+            "product": 1, 
+            "price": 2, 
+            "time_min": 120
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "salina.productpart", 
+        "fields": {
+            "name_text": 16, 
+            "_order": 1, 
+            "product": 1, 
+            "price": 3, 
+            "time_min": 60
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "salina.productpartcolumn", 
+        "fields": {
+            "amount": "50 gr", 
+            "product_part": 1, 
+            "material_column": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "salina.productpartcolumn", 
+        "fields": {
+            "amount": "50x50 cm", 
+            "product_part": 2, 
+            "material_column": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "salina.productpartcolumn", 
+        "fields": {
+            "amount": "1/2 spool", 
+            "product_part": 2, 
+            "material_column": 2
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "salina.productpartcolumn", 
+        "fields": {
+            "amount": "eyes", 
+            "product_part": 2, 
+            "material_column": 3
+        }
+    }, 
+    {
         "pk": 3, 
         "model": "salina.cmstext", 
         "fields": {
@@ -140,6 +234,36 @@
             "short": true, 
             "entry_id": "material_yarn", 
             "description": "Material yarn", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "product_bluish", 
+            "description": "Product bluish", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "product_bluish_part_1", 
+            "description": "Product bluish part 1", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "product_bluish_part_2", 
+            "description": "Product bluish part 2", 
             "page": null
         }
     }, 
@@ -301,6 +425,66 @@
             "text": "Garen", 
             "timestamp": "2012-06-16T14:53:47.836", 
             "cms_text": 6
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Bluish", 
+            "timestamp": "2012-06-17T22:36:09.774", 
+            "cms_text": 14
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Blauwtje", 
+            "timestamp": "2012-06-17T22:36:09.774", 
+            "cms_text": 14
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Knitwork", 
+            "timestamp": "2012-06-18T01:01:09.196", 
+            "cms_text": 15
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Breiwerk", 
+            "timestamp": "2012-06-18T01:01:09.196", 
+            "cms_text": 15
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Lining", 
+            "timestamp": "2012-06-18T01:50:26.696", 
+            "cms_text": 16
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Voering", 
+            "timestamp": "2012-06-18T01:50:26.696", 
+            "cms_text": 16
         }
     }, 
     {
