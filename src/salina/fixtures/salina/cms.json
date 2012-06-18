@@ -125,7 +125,8 @@
         "pk": 1, 
         "model": "salina.productpartcolumn", 
         "fields": {
-            "amount": "50 gr", 
+            "text": 17, 
+            "amount": "50", 
             "product_part": 1, 
             "material_column": 1
         }
@@ -134,7 +135,8 @@
         "pk": 2, 
         "model": "salina.productpartcolumn", 
         "fields": {
-            "amount": "50x50 cm", 
+            "text": 18, 
+            "amount": "50x50", 
             "product_part": 2, 
             "material_column": 1
         }
@@ -143,7 +145,8 @@
         "pk": 3, 
         "model": "salina.productpartcolumn", 
         "fields": {
-            "amount": "1/2 spool", 
+            "text": 19, 
+            "amount": "1/2", 
             "product_part": 2, 
             "material_column": 2
         }
@@ -152,7 +155,8 @@
         "pk": 4, 
         "model": "salina.productpartcolumn", 
         "fields": {
-            "amount": "eyes", 
+            "text": 20, 
+            "amount": "", 
             "product_part": 2, 
             "material_column": 3
         }
@@ -264,6 +268,46 @@
             "short": true, 
             "entry_id": "product_bluish_part_2", 
             "description": "Product bluish part 2", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "product_part_column_0", 
+            "description": "Product bluish part column", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "product_part_column_1", 
+            "description": "Product bluish part column", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "product_part_column_2", 
+            "description": "Product bluish part column", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "product_part_column_3", 
+            "description": "Product bluish part column", 
             "page": null
         }
     }, 
@@ -485,6 +529,86 @@
             "text": "Voering", 
             "timestamp": "2012-06-18T01:50:26.696", 
             "cms_text": 16
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "gr", 
+            "timestamp": "2012-06-18T12:48:12.211", 
+            "cms_text": 17
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "gr", 
+            "timestamp": "2012-06-18T12:48:12.211", 
+            "cms_text": 17
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "cm", 
+            "timestamp": "2012-06-18T12:48:12.211", 
+            "cms_text": 18
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "cm", 
+            "timestamp": "2012-06-18T12:48:12.211", 
+            "cms_text": 18
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "spool", 
+            "timestamp": "2012-06-18T12:48:12.211", 
+            "cms_text": 19
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "klosje", 
+            "timestamp": "2012-06-18T12:48:12.211", 
+            "cms_text": 19
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Eyes", 
+            "timestamp": "2012-06-18T12:48:12.211", 
+            "cms_text": 20
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Ogen", 
+            "timestamp": "2012-06-18T12:48:12.211", 
+            "cms_text": 20
         }
     }, 
     {
