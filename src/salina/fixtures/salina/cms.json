@@ -68,7 +68,7 @@
         "model": "salina.product", 
         "fields": {
             "name_text": 14, 
-            "product_group": 1, 
+            "product_group": 3, 
             "product_id": "bluish"
         }
     }, 
