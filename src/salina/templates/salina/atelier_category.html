@@ -23,17 +23,25 @@
     {% for product_part in product.parts.all %}
     <tr>
         <td>{{product_part.name_text.get_current_translation}}</td>
-        <td>{{product_part.time_min}}</td>
+        <td class="right">{{product_part.time_min}}</td>
         {% for product_column in product_part.get_columns %}
         <td>
         {% if product_column %}
         {{product_column.get_text_translated}}
+        {% else %}
+        -
         {% endif %}
         </td>
         {% endfor %}
-        <td>{{product_part.price}}</td>
+        <td class="right">{{product_part.price}}</td>
     </tr>
     {% endfor %}
+    <tr>
+        <td></td>
+        <td class="right">{{product.get_total_time}}</td>
+        <td colspan="{{ product.material_columns.all.count }}"></td>
+        <td class="right">{{product.get_total_price}}</td>
+    </tr>
     
     {% endfor %}
     </table>

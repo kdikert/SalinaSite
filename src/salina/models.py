@@ -8,6 +8,7 @@ from django.db import models
 from django.db.utils import IntegrityError
 from django.utils import translation
 from django.db.models.signals import pre_delete, pre_save
+from django.db.models.aggregates import Sum
 
 
 class Material(models.Model):
@@ -83,6 +84,20 @@ class Product(models.Model):
     
     class Meta:
         ordering = ['product_id']
+    
+    def get_total_time(self):
+        result = self.parts.all().aggregate(total=Sum('time_min'))
+        if result['total'] is None:
+            return 0
+        else:
+            return result['total']
+    
+    def get_total_price(self):
+        result = self.parts.all().aggregate(total=Sum('price'))
+        if result['total'] is None:
+            return 0
+        else:
+            return result['total']
     
     def __unicode__(self):
         return "%s" % (self.product_id, )

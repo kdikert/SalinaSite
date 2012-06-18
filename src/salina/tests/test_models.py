@@ -84,6 +84,28 @@ class TestProduct(TestCase):
         
         self.assertEqual(CMSText.objects.all().count(), 2)
         self.assertEqual(CMSText.objects.filter(entry_id="product_product1").count(), 0)
+    
+    def test_get_total_price_with_no_product_parts(self):
+        product = Product.objects.create(product_id="product1", product_group=self.product_group)
+        self.assertEqual(product.get_total_price(), 0)
+    
+    def test_get_total_price(self):
+        product = Product.objects.create(product_id="product1", product_group=self.product_group)
+        ProductPart.objects.create(product=product, time_min=30, price=5)
+        ProductPart.objects.create(product=product, time_min=30, price=7)
+        
+        self.assertEqual(product.get_total_price(), 12)
+    
+    def test_get_total_time_with_no_product_parts(self):
+        product = Product.objects.create(product_id="product1", product_group=self.product_group)
+        self.assertEqual(product.get_total_time(), 0)
+    
+    def test_get_total_time(self):
+        product = Product.objects.create(product_id="product1", product_group=self.product_group)
+        ProductPart.objects.create(product=product, time_min=30, price=5)
+        ProductPart.objects.create(product=product, time_min=60, price=5)
+        
+        self.assertEqual(product.get_total_time(), 90)
 
 
 class TestProductPartColumn(TestCase):
