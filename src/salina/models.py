@@ -196,7 +196,7 @@ class ProductPartColumn(models.Model):
         ordering = ['material_column___order']
     
     def get_text_translated(self):
-        return self.amount
+        return "%s %s" % (self.amount, self.text.get_current_translation())
     
     def __unicode__(self):
         return "%s %s" % (self.product_part, self.material_column.material)
