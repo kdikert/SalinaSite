@@ -349,6 +349,9 @@ class CMSText(models.Model):
         try:
             transl = self.translations.filter(locale=locale).latest('timestamp')
             
+            if transl.text == new_text:
+                return
+            
             treshold = timedelta(seconds=settings.SALINA_CMS_TEXT_AMEND_TRESHOLD_SECONDS)
             if update_time - transl.timestamp < treshold:
                 logging.debug("Amending to previous entry (%s)", transl)

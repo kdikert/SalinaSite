@@ -219,6 +219,16 @@ class TestCMSText(TestCase):
         self.assertEqual(translation.timestamp, datetime(2012, 1, 6, 0, 1))
         self.assertEqual(translation.text, "updated en")
     
+    def test_update_translation_ignores_identical_text(self):
+        self.text.overwrite_translation('en', "text en", update_time=datetime(2012, 1, 6, 0, 0))
+        self.assertEqual(self.text.translations.count(), 1)
+        
+        self.text.update_translation('en', "text en", update_time=datetime(2012, 1, 7, 0, 0))
+        
+        translation = self.text.translations.get()
+        self.assertEqual(translation.timestamp, datetime(2012, 1, 6, 0, 0))
+        self.assertEqual(translation.text, "text en")
+    
     def test_overwrite_translation_deletes_old_translations(self):
         self.text.update_translation('en', "en 1", update_time=datetime(2012, 1, 6, 0, 0))
         self.text.update_translation('en', "en 2", update_time=datetime(2012, 1, 7, 0, 0))
