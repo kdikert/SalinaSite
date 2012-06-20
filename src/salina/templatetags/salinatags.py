@@ -9,10 +9,42 @@ from django.utils import translation
 from django.utils.encoding import force_unicode
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
 
 from salina.models import CMSText
 
 register = template.Library()
+
+
+@register.filter
+def minutes_to_hours(value):
+    try:
+        value = int(value)
+    except:
+        value = 0
+    try:
+        hours = int(value / 60)
+        fractions = float(value % 60) / 60
+        
+        if hours == 1 and fractions == 0:
+            return _('%(hour)s hour') % { 'hour' : "%d" % (hours, ) }
+        else:
+            hours = str(hours)
+            if fractions == 0:
+                fractions = ""
+#            elif fractions == 0.5:
+#                fractions = u"\xbd"   # "1/2"
+#                if hours == "0":
+#                    hours = ""
+#                else:
+#                    hours = hours + " "
+            else:
+                fractions = ("%f" % fractions).rstrip('0')[1:]
+            
+            return _('%(hours)s hours') % { 'hours' : "%s%s" % (hours, fractions) }
+    except:
+        import logging
+        logging.exception("X")
 
 
 class CMSTextNode(Node):
