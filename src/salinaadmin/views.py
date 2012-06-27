@@ -8,7 +8,7 @@ from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 
-from salina.models import CMSText, CMSPage
+from salina.models import CMSText, CMSPage, ProductGroup
 
 
 def _get_locale_name(locale_code):
@@ -96,5 +96,25 @@ def text_locale_edit(request, text_id, locale):
 
 
 @login_required
-def products(request):
+def productgroup_index(request):
+    product_groups = ProductGroup.objects.all()
+    
+    
+    return render_to_response("salinaadmin/productgroups.html",
+                              {'product_groups' : product_groups},
+                              context_instance=RequestContext(request))
+
+
+@login_required
+def productgroup_edit(request):
+    return render_to_response("salinaadmin/products.html", context_instance=RequestContext(request))
+
+
+@login_required
+def product(request):
+    return render_to_response("salinaadmin/products.html", context_instance=RequestContext(request))
+
+
+@login_required
+def product_edit(request):
     return render_to_response("salinaadmin/products.html", context_instance=RequestContext(request))

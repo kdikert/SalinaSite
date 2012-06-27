@@ -1,0 +1,63 @@
+{% extends "salinaadmin/base.html" %}
+{% load i18n %}
+{% load salinatags %}
+
+{% block content %}
+
+
+<h1>
+{% trans "Manage atelier products" %}
+</h1>
+
+<div class="section">
+    
+    <table>
+    <tr>
+        <th colspan="2">{% trans "Product" %}</th>
+    </tr>
+    
+    {% for product_group in product_groups %}
+    <tr class="product_group">
+        <td colspan="2">{{product_group.name_text.get_current_translation}}</td>
+    </tr>
+        {% for product in product_group.products.all %}
+        <tr class="product">
+            <td class="grouping_indent"></td>
+            <td>{{product.name_text.get_current_translation}}</td>
+            <td>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>{% trans "Time" %}</th>
+                    <th>{% trans "Price" %}</th>
+                    {% for material_column in product.material_columns.all %}
+                    <th>{{material_column.get_text_translated}}</th>
+                    {% endfor %}
+                </tr>
+                {% for product_part in product.parts.all %}
+                <tr>
+                    <td>{{product_part.name_text.get_current_translation}}</td>
+                    <td>{{product_part.time_min|minutes_to_hours}}</td>
+                    <td>{{product_part.price}}</td>
+                    {% for column in product_part.get_columns %}
+                    <td>
+                    {% if column %}
+                    {{column.get_text_translated}}
+                    {% else %}
+                    -
+                    {% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            </td>
+        </tr>
+        {% endfor %}
+    {% endfor %}
+    
+    </table>
+    
+</div>
+
+{% endblock %}

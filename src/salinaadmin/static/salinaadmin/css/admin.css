@@ -52,6 +52,10 @@ p, div.section, table {
 	margin: 1em 0em;
 }
 
+td table {
+    margin: 0em;
+}
+
 td, th {
 	padding: .1em 2em .1em 0em;
 }
