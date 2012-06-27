@@ -4,12 +4,18 @@ import logging
 import re
 
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.utils import IntegrityError
-from django.utils import translation
 from django.db.models.signals import pre_delete, pre_save
 from django.db.models.aggregates import Sum
+from django.utils import translation
 from django.utils.translation import ugettext as _
+
+
+def _check_valid_id(id_text):
+    if not re.match('^[a-z0-9\-]+$', id_text):
+        raise ValidationError(_("The id field can only contain lower case letters a-z, numbers and dashes"))
 
 
 class Material(models.Model):
@@ -18,11 +24,15 @@ class Material(models.Model):
     
     name_text = models.ForeignKey('CMSText', related_name='material_names', editable=False)
     
-    def __unicode__(self):
-        return "%s" % (self.material_id)
-    
     class Meta:
         ordering = ['material_id']
+    
+    def clean(self, exclude=None):
+        # Note: only called by model forms...
+        _check_valid_id(self.material_id)
+    
+    def __unicode__(self):
+        return "%s" % (self.material_id)
 
 def material_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
@@ -52,6 +62,9 @@ class ProductGroup(models.Model):
     
     class Meta:
         ordering = ['group_id']
+    
+    def clean(self, exclude=None):
+        _check_valid_id(self.group_id)
     
     def __unicode__(self):
         return "%s" % (self.group_id)
@@ -85,6 +98,9 @@ class Product(models.Model):
     
     class Meta:
         ordering = ['product_id']
+    
+    def clean(self, exclude=None):
+        _check_valid_id(self.product_id)
     
     def get_total_time(self):
         result = self.parts.all().aggregate(total=Sum('time_min'))
@@ -274,7 +290,7 @@ class CMSTextManager(models.Manager):
         
         existing_entries = self.filter(entry_id__startswith=prefix).order_by('-entry_id')
         if existing_entries.count():
-            match = re.match('.*_([0-9]+)', existing_entries[0].entry_id)
+            match = re.match('.*_([0-9]+)$', existing_entries[0].entry_id)
             if match:
                 index = int(match.group(1)) + 1
         
@@ -306,6 +322,9 @@ class CMSText(models.Model):
     class Meta:
         verbose_name_plural = "cms entries"
         ordering = ["entry_id"]
+    
+    def clean(self, exclude=None):
+        _check_valid_id(self.entry_id)
     
     def has_translation(self, locale):
         return self.translations.filter(locale=locale).count() > 0
