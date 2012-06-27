@@ -12,8 +12,7 @@
 <div class="section">
     {% trans "Choose a task or click on 'edit' next to a product name." %}
     <ul>
-    <li>{% trans "Manage texts" %}</li>
-    <li>{% trans "Manage atelier products" %}</li>
+    <li><a href="{% url admin_product_add%}">{% trans "Add a product" %}</a></li>
     </ul>
 </div>
 
@@ -29,7 +28,10 @@
     {% for product in product_group.products.all %}
     <tr class="product">
         <td class="grouping_indent"></td>
-        <td>{{product.name_text.get_current_translation}}</td>
+        <td>
+            {{product.name_text.get_current_translation}}
+            (<a class="edit" href="{% url admin_product_edit product.product_id %}">{% trans "Edit" %}</a>)
+        </td>
         <td>
         <table>
             <tr>

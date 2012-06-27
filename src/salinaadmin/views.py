@@ -100,7 +100,7 @@ def productgroup_index(request):
     product_groups = ProductGroup.objects.all()
     
     
-    return render_to_response("salinaadmin/productgroups.html",
+    return render_to_response("salinaadmin/productgroup_index.html",
                               {'product_groups' : product_groups},
                               context_instance=RequestContext(request))
 
@@ -116,5 +116,10 @@ def product(request):
 
 
 @login_required
-def product_edit(request):
+def product_add(request):
+    return render_to_response("salinaadmin/products.html", context_instance=RequestContext(request))
+
+
+@login_required
+def product_edit(request, product_id):
     return render_to_response("salinaadmin/products.html", context_instance=RequestContext(request))
