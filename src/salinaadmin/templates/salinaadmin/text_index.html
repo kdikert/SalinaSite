@@ -10,35 +10,35 @@
 </h1>
 
 <div class="section">
-    <table>
-    <tr>
-        <th></th>
-        <th>{% trans "Description" %}</th>
-        {% for locale_code, locale_name in locales %}
-        <th>{{locale_name}}</th>
-        {% endfor %}
-    </tr>
-    
-    {% for page in pages %}
-    <tr class="text_group"><td colspan="3">{{page.description}}</td></tr>
-    {% for text in page.get_texts %}
-    <tr>
-        <td></td>
-        {% include "salinaadmin/text_index_snippet.html" %}
-    </tr>
-    {% endfor %}
-    {% endfor %}
-    
-    <tr class="text_group"><td colspan="3">{% trans "Other" %}</td></tr>
-    {% for text in unassigned_texts %}
-    <tr>
-        <td></td>
-        {% include "salinaadmin/text_index_snippet.html" %}
-    </tr>
-    {% endfor %}
-    
-    </table>
-    
+{% trans "Click on 'edit' to change a text." %}
 </div>
+
+<table>
+<tr>
+    <th colspan="2">{% trans "Text description" %}</th>
+    {% for locale_code, locale_name in locales %}
+    <th>{{locale_name}}</th>
+    {% endfor %}
+</tr>
+
+{% for page in pages %}
+<tr class="grouping_title"><td colspan="3">{{page.description}}</td></tr>
+{% for text in page.get_texts %}
+<tr>
+    <td class="grouping_indent"></td>
+    {% include "salinaadmin/text_index_snippet.html" %}
+</tr>
+{% endfor %}
+{% endfor %}
+
+<tr class="grouping_title"><td colspan="3">{% trans "Other" %}</td></tr>
+{% for text in unassigned_texts %}
+<tr>
+    <td class="grouping_indent"></td>
+    {% include "salinaadmin/text_index_snippet.html" %}
+</tr>
+{% endfor %}
+
+</table>
 
 {% endblock %}
