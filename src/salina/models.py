@@ -9,6 +9,7 @@ from django.db.utils import IntegrityError
 from django.utils import translation
 from django.db.models.signals import pre_delete, pre_save
 from django.db.models.aggregates import Sum
+from django.utils.translation import ugettext as _
 
 
 class Material(models.Model):
@@ -283,6 +284,13 @@ class CMSTextManager(models.Manager):
         return self.filter(page=None)
 
 
+def _get_locale_name(locale_code):
+    for code, name in settings.LANGUAGES:
+        if code == locale_code:
+            return name
+    return _("Unknown language")
+
+
 class CMSText(models.Model):
     
     entry_id = models.CharField(max_length=128, db_index=True, unique=True)
@@ -316,6 +324,10 @@ class CMSText(models.Model):
         
         return result
     
+    def get_translation_entries_per_locale_with_name(self):
+        translations = self.get_translation_entries_per_locale()
+        return [(locale, _get_locale_name(locale), transl) for locale, transl in translations]
+
     def get_translation_entry(self, locale):
         """Gets the appropriate CMSTranslation for the given locale. If there
         is no translation available for the given locale None is returned.
