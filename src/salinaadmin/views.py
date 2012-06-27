@@ -8,14 +8,10 @@ from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 
-from salina.models import CMSText, CMSPage, ProductGroup
+from salina.models import CMSText, CMSPage, ProductGroup, Product
+from salina.models import _get_locale_name
 
-
-def _get_locale_name(locale_code):
-    for code, name in settings.LANGUAGES:
-        if code == locale_code:
-            return name
-    return "Unknown language"
+from . import forms
 
 
 def login(request):
@@ -61,8 +57,7 @@ def text_edit(request, text_id):
             cms_text.update_translation(locale_code, new_text)
         return HttpResponseRedirect(reverse(text_index))
     else:
-        translations = cms_text.get_translation_entries_per_locale()
-        translations = [(locale, _get_locale_name(locale), transl) for locale, transl in translations]        
+        translations = cms_text.get_translation_entries_per_locale_with_name()
         
         return render_to_response("salinaadmin/text_edit.html",
                                   {'text': cms_text, 'translations': translations},
@@ -122,4 +117,18 @@ def product_add(request):
 
 @login_required
 def product_edit(request, product_id):
-    return render_to_response("salinaadmin/products.html", context_instance=RequestContext(request))
+    product = get_object_or_404(Product, product_id=product_id)
+    
+    if request.method == 'POST':
+        form = forms.ProductForm(instance=product, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse(productgroup_index))
+    else:
+        form = forms.ProductForm(instance=product)
+    
+    return render_to_response("salinaadmin/product_edit.html",
+                              {'form': form,
+                               'product': product},
+                              context_instance=RequestContext(request))
+
