@@ -25,7 +25,36 @@
         </td>
     </tr>
     </table>
-        
+    
+    <table>
+    <tr>
+        <th></th>
+        <th>{% trans "Time" %}</th>
+        <th>{% trans "Price" %}</th>
+        {% for material_column in product.material_columns.all %}
+        <th>{{material_column.get_text_translated}}</th>
+        {% endfor %}
+    </tr>
+    
+    {% for product_part in product.parts.all %}
+    <tr>
+        <td>{{product_part.name_text.get_current_translation}}</td>
+        <td>{{product_part.time_min|minutes_to_hours}}</td>
+        <td>{{product_part.price}}</td>
+        {% for column in product_part.get_columns %}
+        <td>
+        {% if column %}
+        {{column.get_text_translated}}
+        {% else %}
+        -
+        {% endif %}
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    
+    </table>
+    
     <div class="section">
         <input class="submit_button" type="submit" value="{% trans 'Save' %}"/>
         <a class="cancel_button" href="{% url admin_productgroup_index %}">{% trans "Cancel" %}</a>
