@@ -357,6 +357,13 @@ class CMSText(models.Model):
         except CMSTranslation.DoesNotExist:
             return None
     
+    def get_translation(self, locale):
+        result = self.get_translation_entry(locale)
+        if result:
+            return result.text
+        else:
+            return None
+    
     def get_current_translation(self):
         current_language = translation.get_language()
         transl = self.get_translation_entry(current_language)
