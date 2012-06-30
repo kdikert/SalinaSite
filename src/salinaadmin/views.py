@@ -1,4 +1,6 @@
 
+import json
+
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
@@ -6,7 +8,8 @@ import django.contrib.auth.views
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.utils import translation
 
 from salina.models import CMSText, CMSPage, ProductGroup, Product
 from salina.models import _get_locale_name
@@ -113,6 +116,27 @@ def product(request):
 @login_required
 def product_add(request):
     return render_to_response("salinaadmin/products.html", context_instance=RequestContext(request))
+
+
+@login_required
+def product_json(request, product_id):
+    product = get_object_or_404(Product, product_id=product_id)
+    language = translation.get_language()
+    result = {}
+    
+    result['materials'] = [{'name' : material_column.material.name_text.get_translation(language),
+                            'id' : material_column.material.material_id}
+                           for material_column in product.material_columns.all()]
+    
+    result['parts'] = [{'price' : product_part.price,
+                        'time' : product_part.time_min,
+                        'materials' : [{'amount' : column.amount if column is not None else '',
+                                        'text' : column.text.get_translation(language) if column is not None else ''}
+                                       for column in product_part.get_columns()]
+                        }
+                       for product_part in product.parts.all()]
+    
+    return HttpResponse(json.dumps(result), content_type="application/json")
 
 
 @login_required

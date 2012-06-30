@@ -17,5 +17,6 @@ urlpatterns = patterns('salinaadmin.views',
      
      url(r'^products/add$', 'product_add', name='admin_product_add'),
      url(r'^products/(?P<product_id>[0-9a-z\_\-]+)$', 'product', name='admin_product'),
+     url(r'^products/(?P<product_id>[0-9a-z\_\-]+).json$', 'product_json', name='admin_product_json'),
      url(r'^products/(?P<product_id>[0-9a-z\_\-]+)/edit$', 'product_edit', name='admin_product_edit'),
 )
