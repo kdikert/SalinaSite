@@ -12,7 +12,7 @@
         "model": "salina.material", 
         "fields": {
             "name_text": 5, 
-            "material_id": "fabric_wool"
+            "material_id": "fabric-wool"
         }
     }, 
     {
@@ -166,7 +166,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": false, 
-            "entry_id": "about_top", 
+            "entry_id": "about-top", 
             "description": "Top text on about page", 
             "page": "about"
         }
@@ -176,7 +176,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": false, 
-            "entry_id": "atelier_top", 
+            "entry_id": "atelier-top", 
             "description": "Top text on atelier page", 
             "page": "atelier"
         }
@@ -186,7 +186,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": false, 
-            "entry_id": "frontpage_howitworks", 
+            "entry_id": "frontpage-howitworks", 
             "description": "How it works text", 
             "page": "index"
         }
@@ -196,7 +196,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": false, 
-            "entry_id": "frontpage_textile", 
+            "entry_id": "frontpage-textile", 
             "description": "Textile text", 
             "page": "index"
         }
@@ -206,7 +206,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "material_fabric", 
+            "entry_id": "material-fabric", 
             "description": "Material fabric", 
             "page": null
         }
@@ -216,8 +216,8 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "material_fabric_wool", 
-            "description": "Material fabric_wool", 
+            "entry_id": "material-fabric-wool", 
+            "description": "Material fabric-wool", 
             "page": null
         }
     }, 
@@ -226,7 +226,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "material_other", 
+            "entry_id": "material-other", 
             "description": "Material other", 
             "page": null
         }
@@ -236,7 +236,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "material_yarn", 
+            "entry_id": "material-yarn", 
             "description": "Material yarn", 
             "page": null
         }
@@ -246,7 +246,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "product_bluish", 
+            "entry_id": "product-bluish", 
             "description": "Product bluish", 
             "page": null
         }
@@ -256,7 +256,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "product_bluish_part_1", 
+            "entry_id": "productpart-bluish-0", 
             "description": "Product bluish part 1", 
             "page": null
         }
@@ -266,7 +266,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "product_bluish_part_2", 
+            "entry_id": "productpart-bluish-1", 
             "description": "Product bluish part 2", 
             "page": null
         }
@@ -276,7 +276,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "product_part_column_0", 
+            "entry_id": "productpartcolumn-0", 
             "description": "Product bluish part column", 
             "page": null
         }
@@ -286,7 +286,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "product_part_column_1", 
+            "entry_id": "productpartcolumn-1", 
             "description": "Product bluish part column", 
             "page": null
         }
@@ -296,7 +296,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "product_part_column_2", 
+            "entry_id": "productpartcolumn-2", 
             "description": "Product bluish part column", 
             "page": null
         }
@@ -306,7 +306,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "product_part_column_3", 
+            "entry_id": "productpartcolumn-3", 
             "description": "Product bluish part column", 
             "page": null
         }
@@ -316,7 +316,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "productgroup_bags", 
+            "entry_id": "productgroup-bags", 
             "description": "Product group bags", 
             "page": null
         }
@@ -326,7 +326,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "productgroup_cuddlies", 
+            "entry_id": "productgroup-cuddlies", 
             "description": "Product group cuddlies", 
             "page": null
         }
@@ -336,7 +336,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "productgroup_cushions", 
+            "entry_id": "productgroup-cushions", 
             "description": "Product group cushions", 
             "page": null
         }
@@ -346,7 +346,7 @@
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
-            "entry_id": "productgroup_hats", 
+            "entry_id": "productgroup-hats", 
             "description": "Product group hats", 
             "page": null
         }

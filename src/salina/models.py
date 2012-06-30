@@ -36,7 +36,7 @@ class Material(models.Model):
 
 def material_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
-        cms_text_id = "material_%s" % instance.material_id
+        cms_text_id = "material-%s" % instance.material_id
         cms_text_description = "Material %s" % instance.material_id
         name_text = CMSText.objects.create(entry_id=cms_text_id,
                                            description=cms_text_description,
@@ -71,7 +71,7 @@ class ProductGroup(models.Model):
 
 def product_group_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
-        cms_text_id = "productgroup_%s" % instance.group_id
+        cms_text_id = "productgroup-%s" % instance.group_id
         cms_text_description = "Product group %s" % instance.group_id
         name_text = CMSText.objects.create(entry_id=cms_text_id,
                                            description=cms_text_description,
@@ -121,7 +121,7 @@ class Product(models.Model):
 
 def product_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
-        cms_text_id = "product_%s" % instance.product_id
+        cms_text_id = "product-%s" % instance.product_id
         cms_text_description = "Product %s" % instance.product_id
         name_text = CMSText.objects.create(entry_id=cms_text_id,
                                            description=cms_text_description,
@@ -183,7 +183,7 @@ class ProductPart(models.Model):
 def product_part_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
         product = instance.product
-        cms_text_id = CMSText.objects.get_free_id('product_part')
+        cms_text_id = CMSText.objects.get_free_id('productpart')
         cms_text_description = "Product %s part" % (product.product_id)
         name_text = CMSText.objects.create(entry_id=cms_text_id,
                                            description=cms_text_description,
@@ -221,7 +221,7 @@ class ProductPartColumn(models.Model):
 def product_part_column_pre_save_handler(sender, instance, **kwargs):
     if instance.text_id is None:
         product = instance.product_part.product
-        cms_text_id = CMSText.objects.get_free_id('product_part_column')
+        cms_text_id = CMSText.objects.get_free_id('productpartcolumn')
         cms_text_description = "Product %s part column" % (product.product_id)
         text = CMSText.objects.create(entry_id=cms_text_id,
                                       description=cms_text_description,
@@ -290,11 +290,11 @@ class CMSTextManager(models.Manager):
         
         existing_entries = self.filter(entry_id__startswith=prefix).order_by('-entry_id')
         if existing_entries.count():
-            match = re.match('.*_([0-9]+)$', existing_entries[0].entry_id)
+            match = re.match('.*-([0-9]+)$', existing_entries[0].entry_id)
             if match:
                 index = int(match.group(1)) + 1
         
-        return "%s_%d" % (prefix, index)
+        return "%s-%d" % (prefix, index)
     
     def unassigned(self):
         return self.filter(page=None)
