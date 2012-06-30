@@ -182,6 +182,16 @@
         }
     }, 
     {
+        "pk": 21, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": false, 
+            "entry_id": "contact-top", 
+            "description": "Top text on contact info page", 
+            "page": "contact"
+        }
+    }, 
+    {
         "pk": 1, 
         "model": "salina.cmstext", 
         "fields": {
@@ -349,6 +359,16 @@
             "entry_id": "productgroup-hats", 
             "description": "Product group hats", 
             "page": null
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": false, 
+            "entry_id": "webshop-top", 
+            "description": "Top text on webshop page", 
+            "page": "webshop"
         }
     }, 
     {
