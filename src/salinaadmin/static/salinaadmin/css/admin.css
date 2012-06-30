@@ -98,8 +98,8 @@ td, th {
 	margin: 0em;
 	width: 100%;
 	padding: .7em 0em .8em;
+	
 	/*background-color: #9d223c;*/
-
 	background-image: url("../img/gradient1.png");
     background-repeat: repeat-x;
     background-position: 0% 0%;
@@ -135,7 +135,11 @@ td, th {
 
 #content {
 	clear: both;
-	padding: 2em 4em 1em;
+	padding: 2em 0em 1em;
+}
+
+#content h1, #content h2, #content div.section, #content table {
+    margin-left: 60px;
 }
 
 tr.section td, tr.section th {
@@ -160,6 +164,12 @@ td.grouping_indent {
     padding-left: 0em;
     padding-right: 0em;
     width: 1.5em;
+}
+
+.submit_section {
+    margin-left: 0px !important;
+    padding: 1em 0em 1em 80px;
+    background-color: #CBA;
 }
 
 .submit_button {
