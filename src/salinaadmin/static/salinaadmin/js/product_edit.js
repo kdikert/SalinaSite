@@ -31,16 +31,13 @@ function updateMaterialIndexes() {
 	
 	$('.part_form').each(function() {
 		$(this).find('.material_column').each(function(index, partHtml) {
-			$(partHtml).find('.material_amount').each(function() {
-				$element = $(this);
-				$element.attr('id', $element.attr('id').replace(columnAmountRegex, '-amount-' + index));
-				$element.attr('name', $element.attr('name').replace(columnAmountRegex, '-amount-' + index));
-			});
-			$(partHtml).find('.material_text').each(function() {
-				$element = $(this);
-				$element.attr('id', $element.attr('id').replace(columnTextRegex, '-text-' + index));
-				$element.attr('name', $element.attr('name').replace(columnTextRegex, '-text-' + index));
-			});
+			$element = $(partHtml).find('.material_amount').first();
+			$element.attr('id', $element.attr('id').replace(columnAmountRegex, '-amount-' + index));
+			$element.attr('name', $element.attr('name').replace(columnAmountRegex, '-amount-' + index));
+			
+			$element = $(partHtml).find('.material_text').first();
+			$element.attr('id', $element.attr('id').replace(columnTextRegex, '-text-' + index));
+			$element.attr('name', $element.attr('name').replace(columnTextRegex, '-text-' + index));
 		});
 	});
 	
@@ -60,6 +57,32 @@ function appendMaterial() {
 	
 	updateMaterialIndexes();
 	$('.material_form_remove').show();
+}
+
+function removeMaterial($materialTD) {
+	var numberOfMaterials = parseInt($('#id_materials-TOTAL_FORMS').val());
+	var $materialElement = $materialTD.find('select').first();
+	
+	var materialNameRegex = /^materials-([0-9]+)-/;
+	var materialIndex = materialNameRegex.exec($materialElement.attr('name'))[1];
+	
+	if (numberOfMaterials > 1) {
+		$materialTD.remove();
+		
+		$('.part_form').each(function() {
+			$(this).find('.material_column').each(function(index, partHtml) {
+				if (index == materialIndex) {
+					$(partHtml).remove();
+				}
+			});
+		});
+		
+		updateMaterialIndexes();
+	}
+	
+	if (numberOfMaterials == 2) {
+		$('.material_form_remove').hide();
+	}
 }
 
 function updatePartIndexes() {
@@ -92,10 +115,10 @@ function appendPart() {
     $('.part_form_remove').show();
 }
 
-function removePart(part) {
+function removePart($partRow) {
 	var numberOfParts = parseInt($('#id_parts-TOTAL_FORMS').val());
 	if (numberOfParts > 1) {
-		part.remove();
+		$partRow.remove();
 		updatePartIndexes();
 	}
 	if (numberOfParts == 2) {
@@ -117,6 +140,7 @@ $(document).ready(function() {
 //    });
 	
 	$('.material_form_add').click(function() { appendMaterial(); });
+	$('.material_form_remove').click(function() { removeMaterial($(this).parent()); });
 
 	$('.part_form_add').click(function() { appendPart(); });
 	$('.part_form_remove').click(function() { removePart($(this).parent().parent()); });
