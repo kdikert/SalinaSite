@@ -52,6 +52,11 @@ function appendMaterial() {
 	$('.part_form').each(function(index, partHtml) {
 		var $lastMaterialColumn = $(partHtml).find('.material_column:last');
 		var $newMaterialColumn = $lastMaterialColumn.clone(true);
+
+		$newMaterialColumn.find('input').each(function() {
+	    	$(this).val('');
+	    });
+	    
 		$newMaterialColumn.insertAfter($lastMaterialColumn);
 	});
 	
