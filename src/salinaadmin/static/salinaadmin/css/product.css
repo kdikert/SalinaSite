@@ -1,0 +1,29 @@
+
+.product_general input, .product_general select {
+    width: 100%;
+}
+
+.product_grid td, .product_grid th {
+    padding: 0em 1em 0.3em 0em;
+}
+
+td.material_form select {
+    width: 100%;
+}
+
+td.material_column {
+    min-width: 10em;
+}
+
+.material_amount {
+    width: 4em;
+}
+
+.material_text {
+    width: 6em;
+}
+
+span.material_amount {
+    display: block;
+    float: left;    
+}

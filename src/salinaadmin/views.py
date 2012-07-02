@@ -125,7 +125,8 @@ def product_json(request, product_id):
     result = {}
     
     result['materials'] = [{'name' : material_column.material.name_text.get_translation(language),
-                            'id' : material_column.material.material_id}
+                            'id' : material_column.material.material_id,
+                            'pk' : material_column.material.pk}
                            for material_column in product.material_columns.all()]
     
     result['parts'] = [{'price' : product_part.price,
@@ -151,8 +152,16 @@ def product_edit(request, product_id):
     else:
         form = forms.ProductForm(instance=product)
     
+    material_column_formset = forms.MaterialColumnFormSet(prefix='materials')
+    product_part_formset = forms.ProductPartFormSet(prefix='parts')
+    
+    for i, material_column_form in enumerate(material_column_formset):
+        material_column_form.index = i
+    
     return render_to_response("salinaadmin/product_edit.html",
                               {'form': form,
+                               'material_column_formset': material_column_formset,
+                               'product_part_formset': product_part_formset,
                                'product': product},
                               context_instance=RequestContext(request))
 
