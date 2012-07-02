@@ -32,7 +32,7 @@ class Material(models.Model):
         _check_valid_id(self.material_id)
     
     def __unicode__(self):
-        return "%s" % (self.material_id)
+        return "%s" % (self.name_text.get_current_translation())
 
 def material_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
@@ -67,7 +67,7 @@ class ProductGroup(models.Model):
         _check_valid_id(self.group_id)
     
     def __unicode__(self):
-        return "%s" % (self.group_id)
+        return "%s" % (self.name_text.get_current_translation())
 
 def product_group_pre_save_handler(sender, instance, **kwargs):
     if instance.name_text_id is None:
