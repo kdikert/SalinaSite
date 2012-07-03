@@ -26,7 +26,7 @@ class MaterialColumnForm(ModelForm):
         fields = []
 
 
-MaterialColumnFormSet = formset_factory(MaterialColumnForm, extra=3)
+MaterialColumnFormSet = formset_factory(MaterialColumnForm, extra=1)
 
 
 class ProductPartForm(ModelForm):
@@ -44,4 +44,4 @@ class ProductPartForm(ModelForm):
         fields = []
 
 
-ProductPartFormSet = formset_factory(ProductPartForm, extra=2)
+ProductPartFormSet = formset_factory(ProductPartForm, extra=1)

@@ -1,15 +1,40 @@
 
-function update_product(product_json) {
-	var items = [];
-	$.each(product_json.materials, function(key, val) {
-		items.push('<li>' + key + ": " + val.name + " " + val.pk + '</li>');
+function updateProduct(productJSON) {
+	
+	var materialFormsCount = 1; //parseInt($('#id_materials-TOTAL_FORMS').val());
+	var partFormsCount = 1; //parseInt($('#id_parts-TOTAL_FORMS').val());
+	
+	var materials = productJSON['materials'];
+	var parts = productJSON['parts'];
+	
+	for (var i = 0; i < materials.length - materialFormsCount; i++) {
+		appendMaterial();
+	}
+	updateMaterialIndexes();
+	
+	$('.material_form option').each(function() {
+		$(this).removeAttr('selected');
 	});
+	for (var i = 0; i < materials.length; i++) {
+		$('#id_materials-' + i + '-material option[value="' + materials[i]['pk'] + '"]').attr('selected', 'selected');
+	}
 	
-	$('<ul/>', {
-		'class': 'my-new-list',
-		html: items.join('')
-	}).appendTo('body');
+	for (var i = 0; i < parts.length - partFormsCount; i++) {
+		appendPart();
+	}
+	updatePartIndexes();
 	
+	var part;
+	for (var i = 0; i < parts.length; i++) {
+		part = parts[i];
+		$('#id_parts-' + i + '-name').val(part['name']);
+		$('#id_parts-' + i + '-time_min').val(part['time']);
+		$('#id_parts-' + i + '-price').val(part['price']);
+		for (var materialIndex = 0; materialIndex < part.materials.length; materialIndex++) {
+			$('#id_parts-' + i + '-amount-' + materialIndex).val(part.materials[materialIndex].amount);
+			$('#id_parts-' + i + '-text-' + materialIndex).val(part.materials[materialIndex].text);
+		}
+	}
 }
 
 function updateMaterialIndexes() {
@@ -133,22 +158,11 @@ function removePart($partRow) {
 
 $(document).ready(function() {
 	
-	
-	
-//	$('.formset_material').formset({
-//        prefix: 'materials',
-//        formCssClass: 'dynamic_materials_formset'
-//    });
-//    $('.formset_part').formset({
-//        prefix: 'parts',
-//        formCssClass: 'dynamic_parts_formset'
-//    });
-	
 	$('.material_form_add').click(function() { appendMaterial(); });
 	$('.material_form_remove').click(function() { removeMaterial($(this).parent()); });
 
 	$('.part_form_add').click(function() { appendPart(); });
 	$('.part_form_remove').click(function() { removePart($(this).parent().parent()); });
 	
-	$.getJSON('json', update_product);
+	$.getJSON('json', updateProduct);
 });

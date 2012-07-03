@@ -129,7 +129,8 @@ def product_json(request, product_id):
                             'pk' : material_column.material.pk}
                            for material_column in product.material_columns.all()]
     
-    result['parts'] = [{'price' : product_part.price,
+    result['parts'] = [{'name' : product_part.name_text.get_translation(language),
+                        'price' : product_part.price,
                         'time' : product_part.time_min,
                         'materials' : [{'amount' : column.amount if column is not None else '',
                                         'text' : column.text.get_translation(language) if column is not None else ''}
