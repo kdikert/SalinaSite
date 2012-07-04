@@ -15,19 +15,19 @@ class TestMaterial(TestCase):
         self.assertIsNotNone(material.name_text)
         self.assertEqual(CMSText.objects.all().count(), 1)
         
-        self.assertEqual(CMSText.objects.filter(entry_id="material_mat1").count(), 1)
+        self.assertEqual(CMSText.objects.filter(entry_id="material-mat1").count(), 1)
     
     def test_delete_removes_cms_text(self):
         CMSText.objects.create(entry_id='unrelated_entry', description='')
         material = Material.objects.create(material_id="mat1")
         
         self.assertEqual(CMSText.objects.all().count(), 2)
-        self.assertEqual(CMSText.objects.filter(entry_id="material_mat1").count(), 1)
+        self.assertEqual(CMSText.objects.filter(entry_id="material-mat1").count(), 1)
         
         material.delete()
         
         self.assertEqual(CMSText.objects.all().count(), 1)
-        self.assertEqual(CMSText.objects.filter(entry_id="material_mat1").count(), 0)
+        self.assertEqual(CMSText.objects.filter(entry_id="material-mat1").count(), 0)
 
 
 class TestProductGroup(TestCase):
@@ -41,7 +41,7 @@ class TestProductGroup(TestCase):
         self.assertEqual(CMSText.objects.all().count(), 1)
         
         text = CMSText.objects.get()
-        self.assertEqual(text.entry_id, "productgroup_test_group")
+        self.assertEqual(text.entry_id, "productgroup-test_group")
     
     def test_delete_removes_cms_text(self):
         CMSText.objects.create(entry_id='unrelated_entry', description='')
@@ -70,7 +70,7 @@ class TestProduct(TestCase):
         self.assertIsNotNone(product.name_text)
         self.assertEqual(CMSText.objects.all().count(), 2)
         
-        self.assertEqual(CMSText.objects.filter(entry_id="product_product1").count(), 1)
+        self.assertEqual(CMSText.objects.filter(entry_id="product-product1").count(), 1)
     
     def test_delete_removes_cms_text(self):
         CMSText.objects.create(entry_id='unrelated_entry', description='')
@@ -78,7 +78,7 @@ class TestProduct(TestCase):
                                          product_group=self.product_group)
         
         self.assertEqual(CMSText.objects.all().count(), 3)
-        self.assertEqual(CMSText.objects.filter(entry_id="product_product1").count(), 1)
+        self.assertEqual(CMSText.objects.filter(entry_id="product-product1").count(), 1)
         
         product.delete()
         
@@ -134,7 +134,7 @@ class TestProductPartColumn(TestCase):
         self.assertIsNotNone(product_part_column.text)
         self.assertEqual(CMSText.objects.all().count(), 7)
         
-        self.assertEqual(CMSText.objects.filter(entry_id="product_part_column_0").count(), 1)
+        self.assertEqual(CMSText.objects.filter(entry_id="productpartcolumn-0").count(), 1)
     
     def test_delete_removes_cms_text(self):
         
@@ -143,12 +143,12 @@ class TestProductPartColumn(TestCase):
                                                                amount="10")
         
         self.assertEqual(CMSText.objects.all().count(), 7)
-        self.assertEqual(CMSText.objects.filter(entry_id="product_part_column_0").count(), 1)
+        self.assertEqual(CMSText.objects.filter(entry_id="productpartcolumn-0").count(), 1)
         
         product_part_column.delete()
         
         self.assertEqual(CMSText.objects.all().count(), 6)
-        self.assertEqual(CMSText.objects.filter(entry_id="product_part_column_0").count(), 0)
+        self.assertEqual(CMSText.objects.filter(entry_id="productpartcolumn-0").count(), 0)
     
     def test_ordering(self):
         
