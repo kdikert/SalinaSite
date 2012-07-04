@@ -14,7 +14,7 @@ class ProductForm(ModelForm):
 
     class Meta:
         model = models.Product
-        fields = ('product_id', )
+        fields = ('product_id', 'is_displayed')
 
 
 class MaterialColumnForm(ModelForm):

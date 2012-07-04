@@ -67,6 +67,7 @@
         "pk": 1, 
         "model": "salina.product", 
         "fields": {
+            "is_displayed": true, 
             "name_text": 14, 
             "product_group": 3, 
             "product_id": "bluish"
@@ -262,6 +263,46 @@
         }
     }, 
     {
+        "pk": 8, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "productgroup-bags", 
+            "description": "Product group bags", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "productgroup-cuddlies", 
+            "description": "Product group cuddlies", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "productgroup-cushions", 
+            "description": "Product group cushions", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": true, 
+            "entry_id": "productgroup-hats", 
+            "description": "Product group hats", 
+            "page": null
+        }
+    }, 
+    {
         "pk": 15, 
         "model": "salina.cmstext", 
         "fields": {
@@ -318,46 +359,6 @@
             "short": true, 
             "entry_id": "productpartcolumn-3", 
             "description": "Product bluish part column", 
-            "page": null
-        }
-    }, 
-    {
-        "pk": 8, 
-        "model": "salina.cmstext", 
-        "fields": {
-            "short": true, 
-            "entry_id": "productgroup-bags", 
-            "description": "Product group bags", 
-            "page": null
-        }
-    }, 
-    {
-        "pk": 10, 
-        "model": "salina.cmstext", 
-        "fields": {
-            "short": true, 
-            "entry_id": "productgroup-cuddlies", 
-            "description": "Product group cuddlies", 
-            "page": null
-        }
-    }, 
-    {
-        "pk": 11, 
-        "model": "salina.cmstext", 
-        "fields": {
-            "short": true, 
-            "entry_id": "productgroup-cushions", 
-            "description": "Product group cushions", 
-            "page": null
-        }
-    }, 
-    {
-        "pk": 9, 
-        "model": "salina.cmstext", 
-        "fields": {
-            "short": true, 
-            "entry_id": "productgroup-hats", 
-            "description": "Product group hats", 
             "page": null
         }
     }, 
@@ -512,6 +513,86 @@
         }
     }, 
     {
+        "pk": 12, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Bags", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 8
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Tassen", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 8
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Cuddlies", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 10
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Knuffels", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 10
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Cushions", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 11
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Kussens", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 11
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Hats", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 9
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "nl", 
+            "text": "Petten", 
+            "timestamp": "2012-06-16T15:56:01.633", 
+            "cms_text": 9
+        }
+    }, 
+    {
         "pk": 25, 
         "model": "salina.cmstranslation", 
         "fields": {
@@ -629,86 +710,6 @@
             "text": "Ogen", 
             "timestamp": "2012-06-18T12:48:12.211", 
             "cms_text": 20
-        }
-    }, 
-    {
-        "pk": 12, 
-        "model": "salina.cmstranslation", 
-        "fields": {
-            "locale": "en", 
-            "text": "Bags", 
-            "timestamp": "2012-06-16T15:56:01.633", 
-            "cms_text": 8
-        }
-    }, 
-    {
-        "pk": 13, 
-        "model": "salina.cmstranslation", 
-        "fields": {
-            "locale": "nl", 
-            "text": "Tassen", 
-            "timestamp": "2012-06-16T15:56:01.633", 
-            "cms_text": 8
-        }
-    }, 
-    {
-        "pk": 18, 
-        "model": "salina.cmstranslation", 
-        "fields": {
-            "locale": "en", 
-            "text": "Cuddlies", 
-            "timestamp": "2012-06-16T15:56:01.633", 
-            "cms_text": 10
-        }
-    }, 
-    {
-        "pk": 19, 
-        "model": "salina.cmstranslation", 
-        "fields": {
-            "locale": "nl", 
-            "text": "Knuffels", 
-            "timestamp": "2012-06-16T15:56:01.633", 
-            "cms_text": 10
-        }
-    }, 
-    {
-        "pk": 16, 
-        "model": "salina.cmstranslation", 
-        "fields": {
-            "locale": "en", 
-            "text": "Cushions", 
-            "timestamp": "2012-06-16T15:56:01.633", 
-            "cms_text": 11
-        }
-    }, 
-    {
-        "pk": 17, 
-        "model": "salina.cmstranslation", 
-        "fields": {
-            "locale": "nl", 
-            "text": "Kussens", 
-            "timestamp": "2012-06-16T15:56:01.633", 
-            "cms_text": 11
-        }
-    }, 
-    {
-        "pk": 14, 
-        "model": "salina.cmstranslation", 
-        "fields": {
-            "locale": "en", 
-            "text": "Hats", 
-            "timestamp": "2012-06-16T15:56:01.633", 
-            "cms_text": 9
-        }
-    }, 
-    {
-        "pk": 15, 
-        "model": "salina.cmstranslation", 
-        "fields": {
-            "locale": "nl", 
-            "text": "Petten", 
-            "timestamp": "2012-06-16T15:56:01.633", 
-            "cms_text": 9
         }
     }
 ]

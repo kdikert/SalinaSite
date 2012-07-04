@@ -8,7 +8,7 @@
     <h1>{{product_group.name_text.get_current_translation}}</h1>
     
     <table>
-    {% for product in product_group.products.all %}
+    {% for product in products %}
     <tr>
         <th colspan="3">{{product.name_text.get_current_translation}}</th>
     </tr>

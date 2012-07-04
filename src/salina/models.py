@@ -11,6 +11,7 @@ from django.db.models.signals import pre_delete, pre_save
 from django.db.models.aggregates import Sum
 from django.utils import translation
 from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy
 
 
 def _check_valid_id(id_text):
@@ -89,12 +90,21 @@ def product_group_pre_delete_handler(sender, instance, **kwargs):
 pre_delete.connect(product_group_pre_delete_handler, sender=ProductGroup)
 
 
+class ProductManager(models.Manager):
+    
+    def filter_displayed(self):
+        return self.filter(is_displayed=True)
+
+
 class Product(models.Model):
     
     product_id = models.CharField(max_length=64, db_index=True, unique=True)
     product_group = models.ForeignKey(ProductGroup, related_name='products', null=False)
+    is_displayed = models.BooleanField(verbose_name=ugettext_lazy('Is displayed in list'))
     
     name_text = models.ForeignKey('CMSText', related_name='product_names', editable=False)
+    
+    objects = ProductManager()
     
     class Meta:
         ordering = ['product_id']

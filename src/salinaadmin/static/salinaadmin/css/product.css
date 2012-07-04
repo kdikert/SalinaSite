@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+.product_general #id_is_displayed {
+    width: auto;
+}
+
 .product_grid td, .product_grid th {
     padding: 0em 1em 0.3em 0em;
 }
