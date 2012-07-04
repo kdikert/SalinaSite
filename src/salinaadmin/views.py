@@ -11,7 +11,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.utils import translation
 
-from salina.models import CMSText, CMSPage, ProductGroup, Product
+from salina.models import CMSText, CMSPage, ProductGroup, Product,\
+    MaterialColumn, ProductPart, ProductPartColumn
 from salina.models import _get_locale_name
 
 from . import forms
@@ -147,12 +148,35 @@ def product_edit(request, product_id):
     
     if request.method == 'POST':
         form = forms.ProductForm(instance=product, data=request.POST)
+        material_column_formset = forms.MaterialColumnFormSet(prefix='materials', data=request.POST)
+        product_part_formset = forms.ProductPartFormSet(prefix='parts', data=request.POST)
+        
+        print "materials", len(material_column_formset.forms)
+        print "parts", len(product_part_formset.forms)
+        
         if form.is_valid():
             form.save()
+            
+            import logging
+            logging.getLogger('django.db.backends').debug("DELETING 1111111111")
+            print "Deleting"
+#            for material_column in form.instance.material_columns.all():
+#                material_column.delete()
+            for product_part in form.instance.parts.all():
+                for product_column in product_part.columns.all():
+                    logging.getLogger('django.db.backends').debug("Next del")
+                    product_column.text.delete()
+#            form.instance.parts.all().delete()
+#            form.instance.material_columns.all().delete()
+            print "All gone"
+            
+            print MaterialColumn.objects.count(), ProductPart.objects.count(), ProductPartColumn.objects.count()
+            
             return HttpResponseRedirect(reverse(productgroup_index))
     else:
         form = forms.ProductForm(instance=product)
     
+    # The formsets are emptied by default
     material_column_formset = forms.MaterialColumnFormSet(prefix='materials')
     product_part_formset = forms.ProductPartFormSet(prefix='parts')
     
