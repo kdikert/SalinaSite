@@ -1,8 +1,8 @@
 
 function updateProduct(productJSON) {
 	
-	var materialFormsCount = 1; //parseInt($('#id_materials-TOTAL_FORMS').val());
-	var partFormsCount = 1; //parseInt($('#id_parts-TOTAL_FORMS').val());
+	var materialFormsCount = $('#id_product_grid .material_form').length;
+	var partFormsCount = $('#id_product_grid .part_form').length;
 	
 	var materials = productJSON['materials'];
 	var parts = productJSON['parts'];
