@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.utils import IntegrityError
-from django.db.models.signals import pre_delete, pre_save
+from django.db.models.signals import pre_delete, pre_save, post_delete
 from django.db.models.aggregates import Sum
 from django.utils import translation
 from django.utils.translation import ugettext as _
@@ -46,13 +46,13 @@ def material_pre_save_handler(sender, instance, **kwargs):
 
 pre_save.connect(material_pre_save_handler, sender=Material)
 
-def material_pre_delete_handler(sender, instance, **kwargs):
+def material_post_delete_handler(sender, instance, **kwargs):
     try:
         instance.name_text.delete()
     except:
         pass
 
-pre_delete.connect(material_pre_delete_handler, sender=Material)
+post_delete.connect(material_post_delete_handler, sender=Material)
 
 
 class ProductGroup(models.Model):
@@ -81,13 +81,13 @@ def product_group_pre_save_handler(sender, instance, **kwargs):
 
 pre_save.connect(product_group_pre_save_handler, sender=ProductGroup)
 
-def product_group_pre_delete_handler(sender, instance, **kwargs):
+def product_group_post_delete_handler(sender, instance, **kwargs):
     try:
         instance.name_text.delete()
     except:
         pass
 
-pre_delete.connect(product_group_pre_delete_handler, sender=ProductGroup)
+post_delete.connect(product_group_post_delete_handler, sender=ProductGroup)
 
 
 class ProductManager(models.Manager):
@@ -140,13 +140,13 @@ def product_pre_save_handler(sender, instance, **kwargs):
 
 pre_save.connect(product_pre_save_handler, sender=Product)
 
-def product_pre_delete_handler(sender, instance, **kwargs):
+def product_post_delete_handler(sender, instance, **kwargs):
     try:
         instance.name_text.delete()
     except:
         pass
 
-pre_delete.connect(product_pre_delete_handler, sender=Product)
+post_delete.connect(product_post_delete_handler, sender=Product)
 
 
 class MaterialColumn(models.Model):
@@ -202,13 +202,13 @@ def product_part_pre_save_handler(sender, instance, **kwargs):
 
 pre_save.connect(product_part_pre_save_handler, sender=ProductPart)
 
-def product_part_pre_delete_handler(sender, instance, **kwargs):
+def product_part_post_delete_handler(sender, instance, **kwargs):
     try:
         instance.name_text.delete()
     except:
         pass
 
-pre_delete.connect(product_part_pre_delete_handler, sender=ProductPart)
+post_delete.connect(product_part_post_delete_handler, sender=ProductPart)
 
 
 class ProductPartColumn(models.Model):
@@ -240,13 +240,13 @@ def product_part_column_pre_save_handler(sender, instance, **kwargs):
 
 pre_save.connect(product_part_column_pre_save_handler, sender=ProductPartColumn)
 
-def product_part_column_pre_delete_handler(sender, instance, **kwargs):
+def product_part_column_post_delete_handler(sender, instance, **kwargs):
     try:
         instance.text.delete()
     except:
         pass
 
-pre_delete.connect(product_part_column_pre_delete_handler, sender=ProductPartColumn)
+post_delete.connect(product_part_column_post_delete_handler, sender=ProductPartColumn)
 
 
 KNOWN_PAGES = (
