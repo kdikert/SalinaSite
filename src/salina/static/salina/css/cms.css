@@ -16,14 +16,19 @@
 	font-size: 11pt;
 }
 
-.column_1_2 {
-	float: left;
-	width: 47%	
+.columns_2 {
+	overflow: hidden;
+	width: 100%;
 }
 
-.column_2_2 {
+.columns_2 > div {
+	width: 47%;	
+	overflow: hidden;
 	float: right;
-	width: 47%	
+}
+
+.columns_2 > div:FIRST-CHILD {
+	float: left;
 }
 
 #productGroupMenu {

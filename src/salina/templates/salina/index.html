@@ -8,14 +8,9 @@
 
 <img src="{{ STATIC_URL }}salina/img/carousel.jpg" alt="Atelier images"/>
 
-<div class="column_1_2">
-    {% cms_text frontpage-column-left %}
+<div class="columns_2">
+    <div>{% cms_text frontpage-column-left %}</div>
+    <div>{% cms_text frontpage-column-right %}</div>
 </div>
-
-<div class="column_2_2">
-    {% cms_text frontpage-column-right %}
-</div>
-
-<div class="clear"></div>
 
 {% endblock %}
