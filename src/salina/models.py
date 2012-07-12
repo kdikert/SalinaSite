@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.utils import IntegrityError
-from django.db.models.signals import pre_delete, pre_save, post_delete
+from django.db.models.signals import pre_save, post_delete
 from django.db.models.aggregates import Sum
 from django.utils import translation
 from django.utils.translation import ugettext as _
