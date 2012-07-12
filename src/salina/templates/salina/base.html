@@ -1,44 +1,60 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 {% load i18n %}
 {% load salinatags %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{% trans "Atelier Salina" %}</title>
+    <title>{% trans "Atelier Salina" %}{% block pagetitledash %} - {% endblock %}{% block pagetitle %}{% endblock %}</title>
 
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}salina/css/base.css" />
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}salina/css/cms.css" />
 
     <script type="text/javascript" src="{{ STATIC_URL }}salina/js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}salina/js/cms.js"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
 
-<div id="rootwrap" class="centering">
-    <div id="topwrap">
-    <div id="header">
-        <h1>Atelier Salina</h1>
-    
-        <div id="topmenu">
-            <ul>
-                <li><a class="{% url_equals index %}" href="{% url index %}">{% trans "Home" %}</a></li>
-                <li><a class="{% url_equals about %}" href="{% url about %}">{% trans "Who we are" %}</a></li>
-                <li><a class="{% url_startswith atelier %}" href="{% url atelier %}">{% trans "Atelier" %}</a></li>
-                <li><a class="{% url_equals webshop %}" href="{% url webshop %}">{% trans "Webshop" %}</a></li>
-                <li><a class="{% url_equals contact %}" href="{% url contact %}">{% trans "Contact info" %}</a></li>
-            </ul>
-        </div>
-    </div>
+<div id="rootwrap">
+<div id="header" class="centering">
+    <h1>
+        <a class="{% url_equals index %}" href="{% url index %}">
+        <img src="{{ STATIC_URL }}salina/img/title.png" alt="Atelier Salina"/>
+        </a>
+    </h1>
 
-    <div id="content">
-    {% block content %}{% endblock %}
+    <div id="topmenu">
+        <ul class="menu">
+            <li><a class="{% url_equals index %}" href="{% url index %}">{% trans "Home" %}</a></li>
+            <li><a class="{% url_equals about %}" href="{% url about %}">{% trans "Who we are" %}</a></li>
+            <li><a class="{% url_startswith atelier %}" href="{% url atelier %}">{% trans "Atelier" %}</a></li>
+            <li><a class="{% url_equals webshop %}" href="{% url webshop %}">{% trans "Webshop" %}</a></li>
+            <li><a class="{% url_equals contact %}" href="{% url contact %}">{% trans "Contact" %}</a></li>
+        </ul>
     </div>
+</div>
+
+<div id="content" class="centering">
+<h1>{% block pageheading %}{% endblock %}</h1>
+{% block content %}{% endblock %}
+</div>
+</div>
+
+<div id="footer" class="centering">
+    <div id="footer_1">
+        <h2>{% trans "Contact us!" %}</h2>
+        <p>
+        Summer 2012<br/>
+        Email<br/>
+        Phone
+        </p>
     </div>
-    
-    <div id="footer">
-    (c) xxxxx
+    <div id="footer_2">
+        <a href="http://pinterest.com"><img src="{{ STATIC_URL }}salina/img/pinterest.png" alt="Atelier Salina"/></a>
+        <a href="http://facebook.com"><img src="{{ STATIC_URL }}salina/img/facebook.png" alt="Atelier Salina"/></a>
+        <p>
+        {% trans "Copyright Atelier Salina" %} 2012
+        </p>
     </div>
 </div>
 

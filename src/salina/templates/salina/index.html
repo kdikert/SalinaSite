@@ -2,14 +2,20 @@
 {% load i18n %}
 {% load salinatags %}
 
+{% block pagetitledash %}{% endblock %}
+
 {% block content %}
 
-<div class="cmscontainer">
-    {% cms_text frontpage-textile %}
+<img src="{{ STATIC_URL }}salina/img/carousel.jpg" alt="Atelier images"/>
+
+<div class="column_1_2">
+    {% cms_text frontpage-column-left %}
 </div>
 
-<div class="cmscontainer">
-    {% cms_text frontpage-howitworks %}
+<div class="column_2_2">
+    {% cms_text frontpage-column-right %}
 </div>
+
+<div class="clear"></div>
 
 {% endblock %}

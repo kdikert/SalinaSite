@@ -1,25 +1,21 @@
 @CHARSET "utf-8";
 
-html {
+body, html {
 	padding: 0em;
 	margin: 0em;
 	border: 0em;
-	height: 100%;
-}
-
-body {
-	padding: 0em;
-	margin: 0em;
-	border: 0em;
-	height: 100%;
+	
 	font-family: sans-serif;
-	background-color: #f2efe0;
+	color: #242424;
+	
+	background-color: #dfb374;
 }
 
 h1, h2, h3 {
-	font-family: arial;
+	font-family: Consolas, Inconsolata, "Lucida Console", "Courier New", monospace;
 	font-weight: bold;
 	margin: 0em;
+	color: #465864;
 }
 
 h1 {
@@ -32,6 +28,12 @@ h2 {
 
 h3 {
 	font-size: 12pt;
+}
+
+div, img, a {
+	padding: 0em;
+	margin: 0em;
+	border: 0px;
 }
 
 p, table {
@@ -58,106 +60,142 @@ td, th {
 /* *************************************************************** */
 
 .centering {
-	width: 900px;
+	width: 720px;
     margin: 0em auto;
     border: 0em none;
 }
 
-#rootwrap {
-	min-height: 100%;
-	/* background-color: #bb2853; */
-	background-color: #9d223c;
+.right {
+	text-align: right;
 }
 
-#topwrap {
-    padding: 0em 60px;
-    background-color: #faa501;
-    background-image: url("../img/bg_gradient50.png");
-    background-repeat: repeat-x;
-    background-position: 0% 0%;
+.clear {
+	clear: both;
 }
 
-#header {
-	padding: 20px 0em 0em;
+.menu {
+	font-family: Consolas, Inconsolata, "Lucida Console", "Courier New", monospace;
+	font-weight: bold;
 }
 
-#header h1 {
-	padding: 32px 32px 24px;
-	font-family: arial;
-	font-size: 32pt;
-	background-color: #684707;
-	color: #FFF;
-}
-
-#topmenu, #topmenu ul, #topmenu li {
+ul.menu, ul.menu li {
 	padding: 0em;
 	margin: 0em;
 	list-style: none;
 	list-style-type: none;
 }
 
-#topmenu {
-	width: 100%;
+/* *************************************************************** */
+
+#rootwrap {
 	overflow: hidden;
-	margin-top: -10px;
+	
+	background-color: #fff;
+}
+
+#header {
+	padding: 2em 0em 0em;
+}
+
+#header h1 {
+	position: relative;
+	height: 105px;
+	
+	background-image: url("../img/logo.png");
+	background-position: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+#header h1 img {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+
+#topmenu {
+	padding: 2em 0em 0em;
+	margin: 1em 0em 0em;
+	border-top: 3px solid #dfb374;
+	
+	overflow: hidden;
+	width: 100%;
+
+	font-size: 12pt;
 }
 
 #topmenu ul {
 	float: left;
-	left: 50%;
 	position: relative;
+	left: 50%;
+}
+#topmenu li {
+	position: relative;
+	right: 50%;
 }
 
 #topmenu li {
 	float: left;
-	position: relative;
-	right: 50%;
-	margin: 0em 2px 0em;
+	padding: 0em 1em;
 }
 
-#topmenu a, #topmenu a:HOVER, #topmenu a:ACTIVE, #topmenu a:VISITED {
+#topmenu a:LINK, #topmenu a:VISITED {
 	display: block;
 	padding: .5em 1em;
-	min-width: 6em;
 	
-	background-color: #bd2954;
-	color: #FFF;
+	background-color: #fff;
+	color: #dfb374;
 	
-	font-size: 11pt;
-	font-style: normal;
-	font-weight: bold;
 	text-align: center;
 	text-decoration: none;
 	text-transform: uppercase;
 }
 
+#topmenu a:HOVER {
+	background-color: #ddd;
+	color: #fff;
+}
+
 #topmenu a.selectedLink {
-	text-decoration: underline;
+	background-color: #dfb374;
+	color: #fff;
 }
 
 #content {
-	padding: 0em 0em 2em;
+	position: relative;
+	overflow: visible;
+	margin-top: 1.5em;
+	margin-bottom: 2em;
 }
 
 #footer {
-    padding: 1em 60px;
-	height: 5em;
-	background-color: #9d223c;
-	background-image: url("../img/footer_gradient.png");
-    background-repeat: repeat-x;
-    background-position: 0% 0%;
+	overflow: hidden;
+	
+	background-color: #dfb374;
+	color: #fff;
+	font-size: 10pt;
 }
 
-.shadow, #header h1, .cmscontainer {
-	-moz-box-shadow: 3px 3px 4px #000;
-	-webkit-box-shadow: 3px 3px 4px #000;
-	box-shadow: 3px 3px 4px #000;
-	/* For IE 8 */
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
-	/* For IE 5.5 - 7 */
-	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+#footer h2 {
+	color: #fff;
 }
 
-.right {
+#footer > div {
+    padding: 2em 0em 2em;
+}
+	
+#footer_1 {
+	float: left;
+}
+
+#footer_2 {
+	float: right;
 	text-align: right;
+}
+
+#footer_2 a {
+	margin: 0em 0em 0em .5em;
+}
+
+#footer p {
+	margin: 1em 0em 0em;
 }

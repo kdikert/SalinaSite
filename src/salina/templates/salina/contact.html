@@ -2,10 +2,11 @@
 {% load i18n %}
 {% load salinatags %}
 
+{% block pagetitle %}{% trans "Contact" %}{% endblock %}
+{% block pageheading %}{% trans "Contact" %}{% endblock %}
+
 {% block content %}
 
-<div class="cmscontainer">
-    {% cms_text contact-top %}
-</div>
+{% cms_text contact-top %}
 
 {% endblock %}

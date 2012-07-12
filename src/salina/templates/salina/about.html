@@ -2,10 +2,11 @@
 {% load i18n %}
 {% load salinatags %}
 
+{% block pagetitle %}{% trans "About" %}{% endblock %}
+{% block pageheading %}{% trans "About" %}{% endblock %}
+
 {% block content %}
 
-<div class="cmscontainer">
-    {% cms_text about-top %}
-</div>
+{% cms_text about-top %}
 
 {% endblock %}

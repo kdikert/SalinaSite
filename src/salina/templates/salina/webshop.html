@@ -2,10 +2,11 @@
 {% load i18n %}
 {% load salinatags %}
 
+{% block pagetitle %}{% trans "Webshop" %}{% endblock %}
+{% block pageheading %}{% trans "Webshop" %}{% endblock %}
+
 {% block content %}
 
-<div class="cmscontainer">
-    {% cms_text webshop-top %}
-</div>
+{% cms_text webshop-top %}
 
 {% endblock %}

@@ -2,12 +2,25 @@
 {% load i18n %}
 {% load salinatags %}
 
+{% block pagetitle %}{% trans "Atelier" %} - {{product_group.name_text.get_current_translation}}{% endblock %}
+{% block pageheading %}{{product_group.name_text.get_current_translation}}{% endblock %}
+
 {% block content %}
 
-<div class="cmscontainer">
-    <h1>{{product_group.name_text.get_current_translation}}</h1>
-    
-    <table>
+
+<div id="productGroupMenu">
+    <ul class="menu">
+    {% for product_group in product_groups %}
+        <li>
+            <a class="{% url_equals atelier_group product_group.group_id %}" href="{% url atelier_group product_group.group_id %}">
+                {{product_group.name_text.get_current_translation}}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+<table>
     {% for product in products %}
     <tr>
         <th colspan="3">{{product.name_text.get_current_translation}}</th>
@@ -44,7 +57,6 @@
     </tr>
     
     {% endfor %}
-    </table>
-</div>
+</table>
 
 {% endblock %}

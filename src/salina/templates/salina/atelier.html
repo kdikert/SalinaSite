@@ -2,24 +2,23 @@
 {% load i18n %}
 {% load salinatags %}
 
+{% block pagetitle %}{% trans "Atelier" %}{% endblock %}
+{% block pageheading %}{% trans "Atelier" %}{% endblock %}
+
 {% block content %}
 
-<div class="cmscontainer">
-    {% cms_text atelier-top %}
+<div id="productGroupMenu">
+    <ul class="menu">
+    {% for product_group in product_groups %}
+        <li>
+            <a href="{% url atelier_group product_group.group_id %}">
+                {{product_group.name_text.get_current_translation}}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
 </div>
 
-<div class="cmscontainer">
-    <h1>{% trans "Product groups" %}</h1>
-    
-    {% for product_group in product_groups %}
-    <div class="product_group">
-    <h2>{{product_group.name_text.get_current_translation}}</h2>
-    &gt;
-    <a href="{% url atelier_group product_group.group_id %}">
-        {% trans "See alternatives on "%}{{product_group.name_text.get_current_translation|lower}}
-    </a>
-    </div>
-    {% endfor %}
-</div>
+{% cms_text atelier-top %}
 
 {% endblock %}
