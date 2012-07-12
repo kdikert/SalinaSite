@@ -4,24 +4,21 @@
 
 {% block content %}
 
+<h1>{% trans "Password protected section" %}</h1>
 
-<div class="cmscontainer">
-    <h1>
-    {% trans "Password protected section" %}
-    </h1>
-    
-    {% if form.errors %}
-        <p class="error">{% trans "Invalid password" %}</p>
-    {% endif %}
-    
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.username.label_tag }}
-        {{ form.username }}
-        {{ form.password.label_tag }}
-        {{ form.password }}
-        <input type="submit" value="{% trans 'Login' %}"/>
-    </form>
-</div>
+{% if form.errors %}
+    <p class="error">
+    {% trans "Invalid password" %}
+    </p>
+{% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.username.label_tag }}
+    {{ form.username }}
+    {{ form.password.label_tag }}
+    {{ form.password }}
+    <input type="submit" value="{% trans 'Login' %}"/>
+</form>
 
 {% endblock %}
