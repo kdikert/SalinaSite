@@ -33,7 +33,12 @@ h3 {
 div, img, a {
 	padding: 0em;
 	margin: 0em;
-	border: 0px;
+	border: 0px none;
+}
+
+img {
+	display: block;
+	float: none;
 }
 
 p, table {
@@ -62,7 +67,6 @@ td, th {
 .centering {
 	width: 720px;
     margin: 0em auto;
-    border: 0em none;
 }
 
 .right {
@@ -165,13 +169,16 @@ ul.menu, ul.menu li {
 	position: relative;
 	overflow: visible;
 	min-height: 20em;
-	
+}
+
+#contentpadding {
 	margin-top: 1.5em;
 	margin-bottom: 2em;
 }
 
 #footer {
 	overflow: hidden;
+    padding: 2em 0em 2em;
 	
 	background-color: #dfb374;
 	color: #fff;
@@ -182,23 +189,28 @@ ul.menu, ul.menu li {
 	color: #fff;
 }
 
-#footer > div {
-    padding: 2em 0em 2em;
+#footer p {
+	margin: 0em;
+	padding: 1em 0em 0em;
 }
-	
+
 #footer_1 {
 	float: left;
+	width: 50%;
 }
 
 #footer_2 {
 	float: right;
+	width: 50%;
+}
+
+#footer_2 p {
 	text-align: right;
+	clear: both;
 }
 
 #footer_2 a {
 	margin: 0em 0em 0em .5em;
-}
-
-#footer p {
-	margin: 1em 0em 0em;
+	display: block;
+	float: right;
 }
