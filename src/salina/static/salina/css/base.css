@@ -89,7 +89,8 @@ ul.menu, ul.menu li {
 
 #rootwrap {
 	overflow: hidden;
-	
+	width: 100%;
+
 	background-color: #fff;
 }
 
@@ -163,6 +164,8 @@ ul.menu, ul.menu li {
 #content {
 	position: relative;
 	overflow: visible;
+	min-height: 20em;
+	
 	margin-top: 1.5em;
 	margin-bottom: 2em;
 }
