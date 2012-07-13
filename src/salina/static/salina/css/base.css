@@ -94,7 +94,8 @@ ul.menu, ul.menu li {
 #rootwrap {
 	overflow: hidden;
 	width: 100%;
-
+	min-width: 900px;
+	
 	background-color: #fff;
 }
 
@@ -122,6 +123,7 @@ ul.menu, ul.menu li {
 	margin: 1em 0em 0em;
 	border-top: 3px solid #dfb374;
 	
+	position: relative;
 	overflow: hidden;
 	width: 100%;
 
