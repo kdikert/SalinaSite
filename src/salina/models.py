@@ -2,6 +2,7 @@
 from datetime import datetime, timedelta
 import logging
 import re
+import markdown
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -10,8 +11,11 @@ from django.db.utils import IntegrityError
 from django.db.models.signals import pre_save, post_delete
 from django.db.models.aggregates import Sum
 from django.utils import translation
+from django.utils.encoding import force_unicode
+from django.utils.html import escape
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from django.utils.safestring import mark_safe
 
 
 def _check_valid_id(id_text):
@@ -61,6 +65,8 @@ class ProductGroup(models.Model):
     
     name_text = models.ForeignKey('CMSText', related_name='product_group_names', editable=False)
     
+    description_text = models.ForeignKey('CMSText', related_name='product_group_descriptions', editable=False)
+    
     class Meta:
         ordering = ['group_id']
     
@@ -78,12 +84,24 @@ def product_group_pre_save_handler(sender, instance, **kwargs):
                                            description=cms_text_description,
                                            short=True)
         instance.name_text = name_text
+    
+    if instance.description_text_id is None:
+        cms_text_id = "productgroup-%s-description" % instance.group_id
+        cms_text_description = "Product group %s description" % instance.group_id
+        description_text = CMSText.objects.create(entry_id=cms_text_id,
+                                           description=cms_text_description,
+                                           short=False)
+        instance.description_text = description_text
 
 pre_save.connect(product_group_pre_save_handler, sender=ProductGroup)
 
 def product_group_post_delete_handler(sender, instance, **kwargs):
     try:
         instance.name_text.delete()
+    except:
+        pass
+    try:
+        instance.description_text.delete()
     except:
         pass
 
@@ -374,9 +392,12 @@ class CMSText(models.Model):
         else:
             return None
     
-    def get_current_translation(self):
+    def get_current_translation_entry(self):
         current_language = translation.get_language()
-        transl = self.get_translation_entry(current_language)
+        return self.get_translation_entry(current_language)
+    
+    def get_current_translation(self):
+        transl = self.get_current_translation_entry()
         if transl:
             return transl.text
         else:
@@ -459,6 +480,15 @@ class CMSTranslation(models.Model):
     class Meta:
         unique_together = [('cms_text', 'locale', 'timestamp'), ]
         ordering = ['cms_text__entry_id', 'locale', '-timestamp']
+    
+    def get_markup(self, escape_content=False):
+        value = force_unicode(self.text)
+        
+        if escape_content:
+            value = escape(value)
+        
+        value = markdown.markdown(value)
+        return mark_safe(value)
     
     def __unicode__(self):
         return "%s (%s %s)" % (self.cms_text.entry_id, self.locale,

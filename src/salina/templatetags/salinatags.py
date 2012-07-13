@@ -1,13 +1,10 @@
 
-import markdown
-
 from django import template
 from django.template import Node
 from django.template.defaulttags import url
 from django.template.base import TemplateSyntaxError
 from django.utils import translation
 from django.utils.encoding import force_unicode
-from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
@@ -57,7 +54,7 @@ class CMSTextNode(Node):
         self.text_id = text_id
         self.text = None
         
-        self.escape_output = False
+        escape_output = False
         
         try:
             current_language = translation.get_language()
@@ -65,7 +62,7 @@ class CMSTextNode(Node):
             
             transl = cms_text.get_translation_entry(current_language)
             if transl:
-                self.text = transl.text
+                self.text = transl.get_markup(escape_output)
             else:
                 self.text = CMSTextNode.ALERT_BOX % ('missing translation "%s" (%s)' % (self.text_id, current_language))
             
@@ -74,10 +71,6 @@ class CMSTextNode(Node):
     
     def render(self, context):
         value = force_unicode(self.text)
-        
-        if self.escape_output:
-            value = escape(value)
-        value = markdown.markdown(value)
         return mark_safe(value)
 
 

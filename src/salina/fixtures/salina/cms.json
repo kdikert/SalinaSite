@@ -36,6 +36,7 @@
         "model": "salina.productgroup", 
         "fields": {
             "name_text": 8, 
+            "description_text": 23, 
             "group_id": "bags"
         }
     }, 
@@ -44,6 +45,7 @@
         "model": "salina.productgroup", 
         "fields": {
             "name_text": 10, 
+            "description_text": 24, 
             "group_id": "cuddlies"
         }
     }, 
@@ -52,6 +54,7 @@
         "model": "salina.productgroup", 
         "fields": {
             "name_text": 11, 
+            "description_text": 25, 
             "group_id": "cushions"
         }
     }, 
@@ -60,6 +63,7 @@
         "model": "salina.productgroup", 
         "fields": {
             "name_text": 9, 
+            "description_text": 26, 
             "group_id": "hats"
         }
     }, 
@@ -193,22 +197,22 @@
         }
     }, 
     {
-        "pk": 1, 
-        "model": "salina.cmstext", 
-        "fields": {
-            "short": false, 
-            "entry_id": "frontpage-column-right", 
-            "description": "Right column on front page", 
-            "page": "index"
-        }
-    }, 
-    {
         "pk": 2, 
         "model": "salina.cmstext", 
         "fields": {
             "short": false, 
             "entry_id": "frontpage-column-left", 
             "description": "Left column on front page", 
+            "page": "index"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": false, 
+            "entry_id": "frontpage-column-right", 
+            "description": "Right column on front page", 
             "page": "index"
         }
     }, 
@@ -273,12 +277,32 @@
         }
     }, 
     {
+        "pk": 23, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": false, 
+            "entry_id": "productgroup-bags-description", 
+            "description": "Product group bags description", 
+            "page": null
+        }
+    }, 
+    {
         "pk": 10, 
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
             "entry_id": "productgroup-cuddlies", 
             "description": "Product group cuddlies", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": false, 
+            "entry_id": "productgroup-cuddlies-description", 
+            "description": "Product group cuddlies description", 
             "page": null
         }
     }, 
@@ -293,12 +317,32 @@
         }
     }, 
     {
+        "pk": 25, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": false, 
+            "entry_id": "productgroup-cushions-description", 
+            "description": "Product group cushions description", 
+            "page": null
+        }
+    }, 
+    {
         "pk": 9, 
         "model": "salina.cmstext", 
         "fields": {
             "short": true, 
             "entry_id": "productgroup-hats", 
             "description": "Product group hats", 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "salina.cmstext", 
+        "fields": {
+            "short": false, 
+            "entry_id": "productgroup-hats-description", 
+            "description": "Product group hats description", 
             "page": null
         }
     }, 
@@ -393,16 +437,6 @@
         }
     }, 
     {
-        "pk": 1, 
-        "model": "salina.cmstranslation", 
-        "fields": {
-            "locale": "en", 
-            "text": "# How it works\r\n\r\n<img src=\"/static/salina/img/image2.jpg\" alt=\"Image\"/>\r\n\r\nEvery tuesday en thursday evening (19.00 \u2013 22.00 hrs) and wednesday en saaturday morning ( 10.00-13.00 hrs) you can come and work on a piece of your choice. You do not have to register in advance. There are ususally four to six participants.\r\n\r\n[You choose when and how often to come >>](about)", 
-            "timestamp": "2012-06-01T00:55:55", 
-            "cms_text": 1
-        }
-    }, 
-    {
         "pk": 2, 
         "model": "salina.cmstranslation", 
         "fields": {
@@ -410,6 +444,16 @@
             "text": "# Textile\r\n\r\n<img src=\"/static/salina/img/image1.jpg\" alt=\"Image\"/>\r\n\r\nTextile is a material with endless amazing qualities and possibilities. It is felxible, washable, colourful, transparent or opaque, smooth or textured, stretches or not. You can make bags, toys, books, clothing, hats, baskets, cushions, puppets, chairs and much more of it. You can paint it, sew it, glue it, fold it, crease it, wrinkle it, knot it. \r\n\r\n[Come and discover your talent >>](atelier)\r\n", 
             "timestamp": "2012-06-01T00:56:40", 
             "cms_text": 2
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "# How it works\r\n\r\n<img src=\"/static/salina/img/image2.jpg\" alt=\"Image\"/>\r\n\r\nEvery tuesday en thursday evening (19.00 \u2013 22.00 hrs) and wednesday en saaturday morning ( 10.00-13.00 hrs) you can come and work on a piece of your choice. You do not have to register in advance. There are ususally four to six participants.\r\n\r\n[You choose when and how often to come >>](about)", 
+            "timestamp": "2012-06-01T00:55:55", 
+            "cms_text": 1
         }
     }, 
     {
@@ -533,6 +577,16 @@
         }
     }, 
     {
+        "pk": 40, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Little bags, big bags, bags for bycicles. You can make it all yourself! You learn how to make boxes inside a bag, with or without zipper, how to make shoulder straps, design various ways to close you rbag. You will work with several decoration techniques: straps, layer-over-layer effect, bags from shawls. You can bring your own fabric if you like, but NO LEATHER;  that is too stiff for our sewing machines.", 
+            "timestamp": "2012-07-13T12:07:51.921", 
+            "cms_text": 23
+        }
+    }, 
+    {
         "pk": 18, 
         "model": "salina.cmstranslation", 
         "fields": {
@@ -550,6 +604,16 @@
             "text": "Knuffels", 
             "timestamp": "2012-06-16T15:56:01.633", 
             "cms_text": 10
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "A sweet girl? A huge beanbag-frog to sit on? Your own design? Let your imagination run wild! U can make cuddlies from patters we offer, or design one yourself. You'll learn how to give the heads an expression,  work with surprising materials and accessories, if you want you can make an outfit for you cuddly too. You'll see: the possibilities are endless!", 
+            "timestamp": "2012-07-13T12:07:51.921", 
+            "cms_text": 24
         }
     }, 
     {
@@ -573,6 +637,16 @@
         }
     }, 
     {
+        "pk": 38, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "A cushion is not always square, rectangular or round. Cushions can be very bright and colourful. They can have feet or tail, or serve as weatherstrip. They can be of combined fabrics, from braided fabric or wool, you can use to-sur-ton, or use exuberant colours. Don't think this is just applicable to childrens cushions, a sunflower can be very decoratiev on the living room couch!", 
+            "timestamp": "2012-07-13T12:07:51.921", 
+            "cms_text": 25
+        }
+    }, 
+    {
         "pk": 14, 
         "model": "salina.cmstranslation", 
         "fields": {
@@ -590,6 +664,16 @@
             "text": "Petten", 
             "timestamp": "2012-06-16T15:56:01.633", 
             "cms_text": 9
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "salina.cmstranslation", 
+        "fields": {
+            "locale": "en", 
+            "text": "Hats with or without flaps, stiff or limp, as baret, of fabric or wool, anything is possible. You will learn how to take the measurements, how to vary on an basic pattern. You learn how to add lining. You can wash the hats in the washing machine.\r\n\r\nATTENTION: You cannot work with leather; that is too stiff for our sewing machines.", 
+            "timestamp": "2012-07-13T12:07:51.921", 
+            "cms_text": 26
         }
     }, 
     {
