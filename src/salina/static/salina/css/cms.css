@@ -4,10 +4,6 @@
 	margin: 1em 0em .5em;
 }
 
-#content p {
-	margin: 1em 0em 0em;
-}
-
 #content a {
 	color: #dfb374;
 	font-family: Consolas, Inconsolata, "Lucida Console", "Courier New", monospace;
@@ -66,4 +62,26 @@
 #productGroupMenu a.selectedLink {
 	background-color: #465864;
 	color: #fff;
+}
+
+.productGroupDescription p {
+	color: #FFF;
+	background-color: #dfb374;
+	padding: 1em;
+}
+
+.productGroupImages {
+	overflow: hidden;
+	width: 100%;
+	margin: 1em 0em;
+}
+
+.productGroupImages img {
+	float: left;
+	width: 30%;
+	margin-left: 5%;
+}
+
+.productGroupImages img:FIRST-CHILD {
+	margin-left: 0%;
 }

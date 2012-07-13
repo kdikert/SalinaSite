@@ -44,16 +44,24 @@ img {
 p, table {
 	font-family: arial;
 	text-align: justify;
-	font-size: 12pt;
+	font-size: 11pt;
+	line-height: 15pt;
 	margin: 1em 0em;
 	padding: 0px;
 }
 
-table, tr, td, th {
-	border: 0px;
-	margin: 0px;
+table {
 	border-collapse: separate;
 	border-spacing: 0px;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+tr, td, th {
+	border-collapse: separate;
+	border-spacing: 0px;
+	border: 0px;
+	margin: 0px;
 	text-align: left;
 	vertical-align: top;
 }
