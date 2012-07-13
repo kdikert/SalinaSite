@@ -19,12 +19,20 @@
     </ul>
 </div>
 
+<div class="productGroupDescription">
 {{ product_group.description_text.get_current_translation_entry.get_markup }}
+</div>
+
+<div class="productGroupImages">
+    <img src="{{ STATIC_URL }}salina/img/product3.jpg" alt="Product 3 image">
+    <img src="{{ STATIC_URL }}salina/img/product2.jpg" alt="Product 2 image">
+    <img src="{{ STATIC_URL }}salina/img/product1.jpg" alt="Product 1 image">
+</div>
 
 <table>
     {% for product in products %}
     <tr>
-        <th colspan="3">{{product.name_text.get_current_translation}}</th>
+        <td colspan="3"><h2>{{product.name_text.get_current_translation}}</h2></td>
     </tr>
     <tr>
         <th></th>
