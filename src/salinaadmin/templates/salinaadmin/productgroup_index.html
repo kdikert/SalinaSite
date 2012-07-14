@@ -28,10 +28,12 @@
     {% for product in product_group.products.all %}
     <tr class="product">
         <td class="grouping_indent"></td>
-        <td>
+        <th>
             {{product.name_text.get_current_translation}}
-            (<a class="edit" href="{% url admin_product_edit product.product_id %}">{% trans "Edit" %}</a>)
-        </td>
+            <span class="edit" >
+            (<a href="{% url admin_product_edit product.product_id %}">{% trans "Edit" %}</a>)
+            </span>
+        </th>
         <td>
         <table>
             <tr>

@@ -10,6 +10,7 @@ from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.utils import translation
+import django.forms.util
 
 from salina.models import CMSText, CMSPage, ProductGroup, Product,\
     MaterialColumn, ProductPart, ProductPartColumn
@@ -145,40 +146,49 @@ def product_json(request, product_id):
 @login_required
 def product_edit(request, product_id):
     product = get_object_or_404(Product, product_id=product_id)
+    current_language = translation.get_language()
+    
+    material_column_formset = forms.MaterialColumnFormSet(prefix='materials')
+    product_part_formset = forms.ProductPartFormSet(prefix='parts')
     
     if request.method == 'POST':
         form = forms.ProductForm(instance=product, data=request.POST)
-        material_column_formset = forms.MaterialColumnFormSet(prefix='materials', data=request.POST)
-        product_part_formset = forms.ProductPartFormSet(prefix='parts', data=request.POST)
-        
-        print "materials", len(material_column_formset.forms)
-        print "parts", len(product_part_formset.forms)
-        
-        if form.is_valid():
+        try:
+            material_column_formset = forms.MaterialColumnFormSet(prefix='materials', data=request.POST)
+            product_part_formset = forms.ProductPartFormSet(prefix='parts', data=request.POST)
+        except django.forms.util.ValidationError:
+            pass
+            
+        if form.is_valid() and material_column_formset.is_valid() and product_part_formset.is_valid():
             form.save()
             
-            import logging
-            logging.getLogger('django.db.backends').debug("DELETING 1111111111")
-            print "Deleting"
-#            for material_column in form.instance.material_columns.all():
-#                material_column.delete()
-            for product_part in form.instance.parts.all():
-                for product_column in product_part.columns.all():
-                    logging.getLogger('django.db.backends').debug("Next del")
-                    product_column.text.delete()
-#            form.instance.parts.all().delete()
-#            form.instance.material_columns.all().delete()
-            print "All gone"
+            form.instance.parts.all().delete()
+            form.instance.material_columns.all().delete()
             
-            print MaterialColumn.objects.count(), ProductPart.objects.count(), ProductPartColumn.objects.count()
+            material_columns = []
+            for material_form in material_column_formset.forms:
+                material_column = MaterialColumn.objects.create(product=product,
+                                                                material=material_form.cleaned_data['material'])
+                material_columns.append(material_column)
+            
+            for product_part_form in product_part_formset.forms:
+                product_part = ProductPart.objects.create(product=product,
+                                                          time_min=product_part_form.cleaned_data['time_min'],
+                                                          price=product_part_form.cleaned_data['price'])
+                product_part.name_text.update_translation(current_language, product_part_form.cleaned_data['name'])
+                
+                for material_index, material_column in enumerate(material_columns):
+                    amount = product_part_form.cleaned_data['amount-%d' % material_index]
+                    text = product_part_form.cleaned_data['text-%d' % material_index]
+                    
+                    column = ProductPartColumn.objects.create(product_part=product_part,
+                                                              material_column=material_column,
+                                                              amount=amount)
+                    column.text.update_translation(current_language, text)
             
             return HttpResponseRedirect(reverse(productgroup_index))
     else:
         form = forms.ProductForm(instance=product)
-    
-    # The formsets are emptied by default
-    material_column_formset = forms.MaterialColumnFormSet(prefix='materials')
-    product_part_formset = forms.ProductPartFormSet(prefix='parts')
     
     for i, material_column_form in enumerate(material_column_formset):
         material_column_form.index = i

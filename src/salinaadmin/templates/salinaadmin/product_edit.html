@@ -40,6 +40,13 @@
     {{ product_part_formset.management_form }}
     </div>
     
+    {% if material_column_formset.errors or product_part_formset.errors %}
+        <div class="section error">
+        {{ material_column_formset.errors }}
+        {{ product_part_formset.errors }}
+        </div>
+    {% endif %}
+    
     <table class="product_grid" id="id_product_grid">
     
     <tr>

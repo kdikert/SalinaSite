@@ -146,8 +146,12 @@ td, th {
 	color: red;
 }
 
-.edit, .edit:VISITED {
+.edit {
 	font-size: smaller;
+	font-weight: normal;
+}
+
+a.edit, a.edit:VISITED, .edit a, .edit a:VISITED {
 	color: #00F;
 }
 
